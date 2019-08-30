@@ -1,0 +1,18 @@
+{
+  "version": 2,
+  "name": "nodes",
+  "builds": [
+    { "src": "web/package.json", "use": "@now/next" }
+  ],
+  "routes": [
+    {
+      "src": "^/service-worker.js$",
+      "dest": "/web/_next/static/service-worker.js",
+      "headers": {
+        "cache-control": "public, max-age=43200, immutable",
+        "Service-Worker-Allowed": "/"
+      }
+    },
+    { "src": "/(.*)", "dest": "/web/$1?path=$1" }
+  ]
+}
