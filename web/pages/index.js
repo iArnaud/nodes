@@ -9,22 +9,11 @@ import { NodeView, NodeSEO } from '../lib/core/components/node'
 import initNApi from '../lib/core/napi'
 import OfflineBackend from '../lib/backends/offline'
 import config from '../lib/config'
-const PLUGINS_BASE_URL = process.env.PLUGINS_BASE_URL || '/static/plugins'
-const genCorePluginNodes = names => names.map((name, i) => ({ status: 'ok', id: `core-${name}`, parentId: 'plugins', name, sides: { plugin: { canAdd: ['plugin'].includes(name), url: `${PLUGINS_BASE_URL}/core/${name}/index.bundled.js` } } }))
-// const genCorePluginNodes = names => names.map((name, i) => ({ status: 'ok', id: `core-${name}`, parentId: 'plugins', name, sides: { plugin: { canAdd: ['plugin'].includes(name), url: `http://localhost:3030/core/${name}/pkg/dist-web/index.bundled.js` } } }))
-const genCommonPluginNodes = names => names.map((name, i) => ({ status: 'ok', id: `common-${name}`, parentId: 'plugins', name, sides: { plugin: { canAdd: true, url: `${PLUGINS_BASE_URL}/common/${name}/index.bundled.js` } } }))
-const nodes = [
-  { status: 'ok', id: 'nodes-ws', name: 'Nodes WebOS', sides: { desktop: true } },
-  { status: 'ok', parentId: 'nodes-ws', id: 'users', name: 'Users', sides: { desktop: true } },
-  { status: 'ok', parentId: 'nodes-ws', id: 'plugins', name: 'Plugins', sides: { desktop: true } },
-  ...genCorePluginNodes(['ui', 'json', 'user', 'users', 'settings', 'search', 'side', 'node', 'login', 'error', 'remove', 'desktop', 'plugin', 'import', 'export', 'merge', 'nstore']),
-  ...genCommonPluginNodes(['link', 'note'])
-]
+import nodes from '../lib/nodes'
 
-const backend = new OfflineBackend({ nodes })
-const napi = initNApi({ backend, env: config })
+const napi = initNApi({ backend: new OfflineBackend({ nodes }), env: config })
 
-if (typeof window !== 'undefined') window.napi = napi // NOTE: work with nodes in console like in terminal;)
+if (typeof window !== 'undefined') window.napi = napi
 
 const IndexPage = () => {
   const { node, view, viewer } = usePageState(napi)
@@ -39,12 +28,7 @@ const IndexPage = () => {
     <Page theme={dark}>
       <Hotkeys node={node} view={view} napi={napi} viewer={viewer} />
       <NodeSEO node={node} />
-      <NodeView
-        node={node}
-        view={view}
-        napi={napi}
-        viewer={viewer}
-      />
+      <NodeView node={node} view={view} napi={napi} viewer={viewer} />
     </Page>
   )
 }
