@@ -24,7 +24,7 @@ const nodes = [
 const backend = new OfflineBackend({ nodes })
 const napi = initNApi({ backend, env: config })
 
-if (typeof window !== 'undefined' && window.Cypress) window.napi = napi // NOTE: cypress
+if (typeof window !== 'undefined') window.napi = napi // NOTE: work with nodes in console like in terminal;)
 
 const IndexPage = () => {
   const { node, view, viewer } = usePageState(napi)
