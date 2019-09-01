@@ -19,7 +19,31 @@ class OfflineBackend extends BaseBackend {
   }
 
   async install () {
-    return Promise.all(this._nodes.map(async node => this.fsBackend.create(node)))
+    const id = ObjectId()
+    const userNode = await this.fsBackend.create({
+      id,
+      parentId: 'users',
+      name: 'New User',
+      status: 'ok',
+      sides: {
+        user: { name: 'New User', providers: { local: { id } } },
+        markdown: {
+          content: `
+# Nodes beta
+
+Welcome to Nodes, a hackable lightweight offline-first web system with composable apps.
+
+1. <a href="https://spectrum.chat/nodes" target="_blank">Join the community</a>
+
+2. <a href="https://spectrum.chat/nodes" target="_blank">Support project </a>
+3. Nodes is actively developed so stay tuned;)`
+        },
+        desktop: {}
+      }
+    })
+    cookie.set('token', [id, 'local', 'admin@example.com'].join('-'))
+    this._nodes.push(userNode)
+    return Promise.all(this._nodes.map(async node => this.fsBackend.create({ ...node, sides: { ...node.sides, users: [{ id: userNode.id, role: 'admin' }] } })))
   }
 
   async checkUpdates () {
@@ -45,6 +69,7 @@ class OfflineBackend extends BaseBackend {
         await this.checkUpdates()
       }
       const nodes = await this.fsBackend.find()
+      console.log('nodes', nodes)
       await this._search.addAllAsync(nodes.map(node => ({ id: node.id, name: node.name })))
       console.log(`${this._search.documentCount} documents index for search`)
       this._db = await configureLoki({ nodes, adapter: this._adapter })
@@ -61,7 +86,9 @@ class OfflineBackend extends BaseBackend {
   }
 
   async login (login, password) {
-    const token = `${login}-local-${login}`
+    const userNode = (await this.find({ parentId: 'users', name: login })).items[0]
+    if (!userNode) return null
+    const token = `${userNode.sides.user.providers.local.id}-local-${userNode.sides.user.email}`
     cookie.set('token', token)
     return token
   }
@@ -134,11 +161,11 @@ class OfflineBackend extends BaseBackend {
 
   async find (query) {
     const { limit = 10, lastId, ..._query } = query
-    // console.log('[Offline backend] find', query)
+    console.log('[Offline backend] find', query)
     const nodesCollection = await this.getDB()
     // FIXME: support pagination via id: { $gt: lastId }
     const items = nodesCollection.chain().find(_query).limit(limit).data()
-    // console.log('[Offline backend] found', items)
+    console.log('[Offline backend] found', items)
     return { items }
   }
 

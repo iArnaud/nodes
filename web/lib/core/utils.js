@@ -2,13 +2,16 @@ import React from 'react'
 import dynamic from 'next/dynamic'
 
 // ui
-import { Grid, Box, Text, Image, Anchor, Menu, ResponsiveContext, ThemeContext, TextInput, CheckBox, Button, Stack, InfiniteScroll } from 'grommet'
+import {
+  Grid, Box, Text, Image, Anchor, Menu, ResponsiveContext, Paragraph,
+  ThemeContext, TextInput, CheckBox, Button, Stack, InfiniteScroll, Table, Markdown
+} from 'grommet'
 import {
   Add, Duplicate, Edit, Pin, Next, Trash, More, Code,
   Desktop, StatusCritical, Login, Action, Aggregate, Calculator,
   Install, InstallOption, Apps, Directions, Search, LinkBottom, Services, UserSettings,
   Logout, User, Close, Checkmark, Group, Google, WifiNone, Wifi, Link,
-  Share, CirclePlay, DocumentPdf, Image as ImageIcon, Note, Download, Upload, Star
+  Share, CirclePlay, DocumentPdf, Image as ImageIcon, Note, Download, Upload, Star, DocumentText
 } from 'grommet-icons'
 
 import * as Nodehub from './components/node'
@@ -37,13 +40,16 @@ import Router from 'next/router'
 const NodehubLogo = dynamic(() => import('./components/utils/NodehubLogo')) // code-splitted & working!
 const http = axios
 const lodash = { get, find, debounce, throttle, isEqual }
-const Grommet = { Grid, Box, Text, Image, Anchor, Menu, ResponsiveContext, ThemeContext, TextInput, CheckBox, Button, Stack, InfiniteScroll }
+const Grommet = {
+  Grid, Box, Text, Image, Anchor, Menu, ResponsiveContext,
+  ThemeContext, TextInput, CheckBox, Button, Stack, InfiniteScroll, Table, Markdown, Paragraph
+}
 const icons = {
   Add, Duplicate, Edit, Pin, Next, Trash, More, Code,
   Desktop, StatusCritical, Login, Action, Aggregate, Calculator,
   Install, InstallOption, Apps, Directions, Search, LinkBottom, Services, UserSettings,
   Logout, User, Close, Checkmark, Group, Google, WifiNone, Wifi, Link,
-  Share, CirclePlay, DocumentPdf, Image: ImageIcon, Note, Download, Upload, Star
+  Share, CirclePlay, DocumentPdf, Image: ImageIcon, Note, Download, Upload, Star, DocumentText
 }
 const DnD = { ...ReactDnD, HTML5Backend, NativeTypes }
 const baseDeps = {

@@ -1,28 +1,6 @@
 const Loki = require('lokijs')
-const LokiIndexedAdapter = require('lokijs/src/loki-indexed-adapter')
 
 const setupLoki = ({ nodes, adapter }) => {
-  if (adapter === 'indexdb') {
-    return new Promise((resolve, reject) => {
-      const databaseInitialize = () => {
-        let nodesCollection = db.getCollection('nodes')
-        if (!nodesCollection) {
-          nodesCollection = db.addCollection('nodes', { unique: ['id'] })
-          // nodesCollection.setChangesApi(true)
-          nodes.forEach(node => nodesCollection.insert(node))
-          db.saveDatabase(() => resolve(db))
-        } else {
-          resolve(db)
-        }
-      }
-      const db = new Loki('nodehub', {
-        adapter: new LokiIndexedAdapter('nodes'),
-        autoload: true,
-        autoloadCallback: databaseInitialize,
-        autosave: false
-      })
-    })
-  }
   return new Promise(resolve => {
     const db = new Loki('nodehub')
     let nodesCollection = db.getCollection('nodes')

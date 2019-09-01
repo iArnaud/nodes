@@ -4,7 +4,7 @@ import { useRouter } from 'next/router'
 
 const authenticate = napi => async token => {
   const [id, provider, email] = token.split('-')
-  console.log('from authenticate', id, provider, email)
+  console.log('from authenticate', id, provider)
   let userNode
   userNode = await napi.findNode({ [`sides.user.providers.${provider}.id`]: id })
   if (userNode.status === 'error') {
