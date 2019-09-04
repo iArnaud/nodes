@@ -1,5 +1,6 @@
 import React from 'react'
 import dynamic from 'next/dynamic'
+import Link from 'next/link'
 
 // ui
 import {
@@ -10,7 +11,7 @@ import {
   Add, Duplicate, Edit, Pin, Next, Trash, More, Code,
   Desktop, StatusCritical, Login, Action, Aggregate, Calculator,
   Install, InstallOption, Apps, Directions, Search, LinkBottom, Services, UserSettings,
-  Logout, User, Close, Checkmark, Group, Google, WifiNone, Wifi, Link,
+  Logout, User, Close, Checkmark, Group, Google, WifiNone, Wifi, Link as LinkIcon,
   Share, CirclePlay, DocumentPdf, Image as ImageIcon, Note, Download, Upload, Star, DocumentText
 } from 'grommet-icons'
 
@@ -48,13 +49,14 @@ const icons = {
   Add, Duplicate, Edit, Pin, Next, Trash, More, Code,
   Desktop, StatusCritical, Login, Action, Aggregate, Calculator,
   Install, InstallOption, Apps, Directions, Search, LinkBottom, Services, UserSettings,
-  Logout, User, Close, Checkmark, Group, Google, WifiNone, Wifi, Link,
+  Logout, User, Close, Checkmark, Group, Google, WifiNone, Wifi, Link: LinkIcon,
   Share, CirclePlay, DocumentPdf, Image: ImageIcon, Note, Download, Upload, Star, DocumentText
 }
 const DnD = { ...ReactDnD, HTML5Backend, NativeTypes }
 const baseDeps = {
   React,
   Router,
+  Link,
   icons,
   JSONSchemaForm,
   CodeEditor,

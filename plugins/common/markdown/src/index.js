@@ -1,6 +1,6 @@
 export default async ({ __deps__, __imports__ }) => {
   const { Box, Text, Image, Table, Anchor, Markdown, Paragraph } = __imports__.grommet
-  const { React, lodash: _, icons, CodeEditor } = __imports__.utils
+  const { React, lodash: _, icons, CodeEditor, Link } = __imports__.utils
   const { NodeLink } = __imports__.nodehub
   const { napi, NodeView, iconSize, viewer } = __deps__
 
@@ -18,6 +18,7 @@ export default async ({ __deps__, __imports__ }) => {
     a: { component: Anchor, props: { size } },
     Box: { component: Box },
     Node: { component: Node },
+    Link: { component: Link },
     NodeLink: { component: NodeLink },
     Text: { component: Text, props: { size } },
     Image: { component: Image },

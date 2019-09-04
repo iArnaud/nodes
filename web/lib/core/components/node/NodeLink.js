@@ -1,8 +1,9 @@
 import React from 'react'
 import Link from 'next/link'
 import { withRouter } from 'next/router'
+import { Anchor } from 'grommet'
 
-const NodeLink = ({ node, view, query = {}, router, children }) => {
+const NodeLink = ({ node, view, query = {}, router, label, children }) => {
   query = { ...query, node }
   if (view) {
     query[`${node}-view`] = view
@@ -22,7 +23,7 @@ const NodeLink = ({ node, view, query = {}, router, children }) => {
     }
   }
   return <Link href={href}>
-    {React.cloneElement(children, {
+    {React.cloneElement(children || <Anchor label={label || node} />, {
       onDragEnter: e => {
         e.preventDefault()
         // setRedirect()

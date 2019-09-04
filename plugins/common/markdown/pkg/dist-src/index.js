@@ -20,7 +20,7 @@ export default
   var _ref2 = _asyncToGenerator(
   /*#__PURE__*/
   regeneratorRuntime.mark(function _callee2(_ref) {
-    var __deps__, __imports__, _imports__$grommet, Box, Text, Image, Table, Anchor, Markdown, Paragraph, _imports__$utils, React, _, icons, CodeEditor, NodeLink, napi, NodeView, iconSize, viewer, Node, components, _view, view, _edit, edit, icon, preview;
+    var __deps__, __imports__, _imports__$grommet, Box, Text, Image, Table, Anchor, Markdown, Paragraph, _imports__$utils, React, _, icons, CodeEditor, Link, NodeLink, napi, NodeView, iconSize, viewer, Node, components, _view, view, _edit, edit, icon, preview;
 
     return regeneratorRuntime.wrap(function _callee2$(_context2) {
       while (1) {
@@ -28,7 +28,7 @@ export default
           case 0:
             __deps__ = _ref.__deps__, __imports__ = _ref.__imports__;
             _imports__$grommet = __imports__.grommet, Box = _imports__$grommet.Box, Text = _imports__$grommet.Text, Image = _imports__$grommet.Image, Table = _imports__$grommet.Table, Anchor = _imports__$grommet.Anchor, Markdown = _imports__$grommet.Markdown, Paragraph = _imports__$grommet.Paragraph;
-            _imports__$utils = __imports__.utils, React = _imports__$utils.React, _ = _imports__$utils.lodash, icons = _imports__$utils.icons, CodeEditor = _imports__$utils.CodeEditor;
+            _imports__$utils = __imports__.utils, React = _imports__$utils.React, _ = _imports__$utils.lodash, icons = _imports__$utils.icons, CodeEditor = _imports__$utils.CodeEditor, Link = _imports__$utils.Link;
             NodeLink = __imports__.nodehub.NodeLink;
             napi = __deps__.napi, NodeView = __deps__.NodeView, iconSize = __deps__.iconSize, viewer = __deps__.viewer;
 
@@ -107,6 +107,9 @@ export default
                 },
                 Node: {
                   component: Node
+                },
+                Link: {
+                  component: Link
                 },
                 NodeLink: {
                   component: NodeLink
