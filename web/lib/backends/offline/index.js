@@ -35,7 +35,7 @@ Welcome to Nodes, a hackable lightweight offline-first web system with composabl
 
 1. <a href="https://spectrum.chat/nodes" target="_blank">Join the community</a>
 
-2. <a href="https://spectrum.chat/nodes" target="_blank">Support project </a>
+2. <a href="https://patreon.com/nodes" target="_blank">Support project </a>
 3. Nodes is actively developed so stay tuned;)`
         },
         desktop: {}
@@ -161,11 +161,11 @@ Welcome to Nodes, a hackable lightweight offline-first web system with composabl
 
   async find (query) {
     const { limit = 10, lastId, ..._query } = query
-    console.log('[Offline backend] find', query)
+    // console.log('[Offline backend] find', query)
     const nodesCollection = await this.getDB()
     // FIXME: support pagination via id: { $gt: lastId }
     const items = nodesCollection.chain().find(_query).limit(limit).data()
-    console.log('[Offline backend] found', items)
+    // console.log('[Offline backend] found', items)
     return { items }
   }
 
