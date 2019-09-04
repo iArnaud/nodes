@@ -34,15 +34,16 @@ class OfflineBackend extends BaseBackend {
 
 Welcome to Nodes, a hackable lightweight offline-first web system with composable apps.
 
-1. Nodes is like directories with superpowers given by micro-apps called sides.
-2. Each side "do one thing and do it well"(like url preview, text note and so on)
-3. Node can contain one instance of each side type and another nodes.
+- Nodes is like directories with superpowers given by micro-apps called sides.
 
-1. <NodeLink node="${tutorialId}" label="Getting Started" />
+-  Each side "do one thing and do it well"(like url preview, text note and so on)
 
-2. <a href="https://spectrum.chat/nodes" target="_blank">Join the community</a>
+- Node can contain one instance of each side type and another nodes.
 
-3. <a href="https://patreon.com/nodes" target="_blank">Support project </a>`
+Now, go <NodeLink node="tutorial" label="create your first node" />, <a href="https://spectrum.chat/nodes" target="_blank">join the community</a> and <a href="https://patreon.com/nodes" target="_blank">support project  on Patreon</a>.
+
+Have a nice day, you are awesome!
+`
         },
         desktop: {}
       }
