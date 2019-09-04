@@ -19,7 +19,8 @@ class OfflineBackend extends BaseBackend {
   }
 
   async install () {
-    const id = ObjectId()
+    const id = 'welcome'
+    const tutorialId = 'tutorial'
     const userNode = await this.fsBackend.create({
       id,
       parentId: 'users',
@@ -33,16 +34,32 @@ class OfflineBackend extends BaseBackend {
 
 Welcome to Nodes, a hackable lightweight offline-first web system with composable apps.
 
-1. <a href="https://spectrum.chat/nodes" target="_blank">Join the community</a>
+1. <a href="/?node=${tutorialId}">Getting Started</a>
+2. <a href="https://spectrum.chat/nodes" target="_blank">Join the community</a>
 
-2. <a href="https://patreon.com/nodes" target="_blank">Support project </a>
-3. Nodes is actively developed so stay tuned;)`
+3. <a href="https://patreon.com/nodes" target="_blank">Support project </a>`
         },
         desktop: {}
       }
     })
+    const tutorialNode = await this.fsBackend.create({
+      id: tutorialId,
+      parentId: userNode.id,
+      name: 'Tutorial',
+      sides: {
+        markdown: {
+          content: `
+# Tutorial
+
+1. Nodes is like directories with superpowers given by micro-apps called sides.
+2. Each side "do one thing and do it well"(like url preview, text note and so on)
+3. Node can contain one instance of each side type and another nodes.
+          `
+        }
+      }
+    })
     cookie.set('token', [id, 'local', 'admin@example.com'].join('-'))
-    this._nodes.push(userNode)
+    this._nodes.push(userNode, tutorialNode)
     return Promise.all(this._nodes.map(async node => this.fsBackend.create({ ...node, sides: { ...node.sides, users: [{ id: userNode.id, role: 'admin' }] } })))
   }
 

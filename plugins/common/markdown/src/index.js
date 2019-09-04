@@ -1,7 +1,7 @@
 export default async ({ __deps__, __imports__ }) => {
   const { Box, Text, Image, Table, Anchor, Markdown, Paragraph } = __imports__.grommet
   const { React, lodash: _, icons, CodeEditor } = __imports__.utils
-  const { napi, NodeView, iconSize, viewer } = __deps__
+  const { napi, NodeView, iconSize, viewer, NodeLink } = __deps__
 
   const Node = ({ id, view, ...rest }) => {
     const [node, setNode] = React.useState()
@@ -17,6 +17,7 @@ export default async ({ __deps__, __imports__ }) => {
     a: { component: Anchor, props: { size } },
     Box: { component: Box },
     Node: { component: Node },
+    NodeLink: { component: NodeLink },
     Text: { component: Text, props: { size } },
     Image: { component: Image },
     Table: { component: Table },

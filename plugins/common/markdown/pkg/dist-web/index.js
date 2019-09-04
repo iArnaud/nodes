@@ -113,7 +113,7 @@ var index = /*#__PURE__*/
   var _ref2 = _asyncToGenerator(
   /*#__PURE__*/
   regeneratorRuntime.mark(function _callee2(_ref) {
-    var __deps__, __imports__, _imports__$grommet, Box, Text, Image, Table, Anchor, Markdown, Paragraph, _imports__$utils, React, _, icons, CodeEditor, napi, NodeView, iconSize, viewer, Node, components, _view, view, _edit, edit, icon, preview;
+    var __deps__, __imports__, _imports__$grommet, Box, Text, Image, Table, Anchor, Markdown, Paragraph, _imports__$utils, React, _, icons, CodeEditor, napi, NodeView, iconSize, viewer, NodeLink, Node, components, _view, view, _edit, edit, icon, preview;
 
     return regeneratorRuntime.wrap(function _callee2$(_context2) {
       while (1) {
@@ -122,7 +122,7 @@ var index = /*#__PURE__*/
             __deps__ = _ref.__deps__, __imports__ = _ref.__imports__;
             _imports__$grommet = __imports__.grommet, Box = _imports__$grommet.Box, Text = _imports__$grommet.Text, Image = _imports__$grommet.Image, Table = _imports__$grommet.Table, Anchor = _imports__$grommet.Anchor, Markdown = _imports__$grommet.Markdown, Paragraph = _imports__$grommet.Paragraph;
             _imports__$utils = __imports__.utils, React = _imports__$utils.React, _ = _imports__$utils.lodash, icons = _imports__$utils.icons, CodeEditor = _imports__$utils.CodeEditor;
-            napi = __deps__.napi, NodeView = __deps__.NodeView, iconSize = __deps__.iconSize, viewer = __deps__.viewer;
+            napi = __deps__.napi, NodeView = __deps__.NodeView, iconSize = __deps__.iconSize, viewer = __deps__.viewer, NodeLink = __deps__.NodeLink;
 
             Node = function Node(_ref3) {
               var id = _ref3.id,
@@ -199,6 +199,9 @@ var index = /*#__PURE__*/
                 },
                 Node: {
                   component: Node
+                },
+                NodeLink: {
+                  component: NodeLink
                 },
                 Text: {
                   component: Text,

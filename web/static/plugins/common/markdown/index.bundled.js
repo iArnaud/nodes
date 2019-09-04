@@ -36,6 +36,42 @@ function _arrayWithHoles(arr) {
   if (Array.isArray(arr)) return arr;
 }
 
+function _objectWithoutProperties(source, excluded) {
+  if (source == null) return {};
+
+  var target = _objectWithoutPropertiesLoose(source, excluded);
+
+  var key, i;
+
+  if (Object.getOwnPropertySymbols) {
+    var sourceSymbolKeys = Object.getOwnPropertySymbols(source);
+
+    for (i = 0; i < sourceSymbolKeys.length; i++) {
+      key = sourceSymbolKeys[i];
+      if (excluded.indexOf(key) >= 0) continue;
+      if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue;
+      target[key] = source[key];
+    }
+  }
+
+  return target;
+}
+
+function _objectWithoutPropertiesLoose(source, excluded) {
+  if (source == null) return {};
+  var target = {};
+  var sourceKeys = Object.keys(source);
+  var key, i;
+
+  for (i = 0; i < sourceKeys.length; i++) {
+    key = sourceKeys[i];
+    if (excluded.indexOf(key) >= 0) continue;
+    target[key] = source[key];
+  }
+
+  return target;
+}
+
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {
   try {
     var info = gen[key](arg);
@@ -77,20 +113,21 @@ var index = /*#__PURE__*/
   var _ref2 = _asyncToGenerator(
   /*#__PURE__*/
   regeneratorRuntime.mark(function _callee2(_ref) {
-    var __deps__, __imports__, _imports__$grommet, Box, Text, Image, Table, Anchor, Markdown, Paragraph, _imports__$utils, React, _, icons, CodeEditor, napi, NodeView, iconSize, viewer, Node, components, _view, view, _edit, edit, icon, preview;
+    var __deps__, __imports__, _imports__$grommet, Box, Text, Image, Table, Anchor, Markdown, Paragraph, _imports__$utils, React, _, icons, CodeEditor, napi, NodeView, iconSize, viewer, NodeLink, Node, components, _view, view, _edit, edit, icon, preview;
 
     return regeneratorRuntime.wrap(function _callee2$(_context2) {
       while (1) {
         switch (_context2.prev = _context2.next) {
           case 0:
             __deps__ = _ref.__deps__, __imports__ = _ref.__imports__;
-            _imports__$grommet = __imports__.grommet, Box = _imports__$grommet.Box, Text = _imports__$grommet.Text, Image = _imports__$grommet.Image, Table = _imports__$grommet.Table, Anchor = _imports__$grommet.Anchor, Markdown = _imports__$grommet.Markdown, Paragraph = _imports__$grommet.Paragraph; // const { React, lodash: _, Router, Player, PreviewEditor, icons } = __imports__.utils
-
+            _imports__$grommet = __imports__.grommet, Box = _imports__$grommet.Box, Text = _imports__$grommet.Text, Image = _imports__$grommet.Image, Table = _imports__$grommet.Table, Anchor = _imports__$grommet.Anchor, Markdown = _imports__$grommet.Markdown, Paragraph = _imports__$grommet.Paragraph;
             _imports__$utils = __imports__.utils, React = _imports__$utils.React, _ = _imports__$utils.lodash, icons = _imports__$utils.icons, CodeEditor = _imports__$utils.CodeEditor;
-            napi = __deps__.napi, NodeView = __deps__.NodeView, iconSize = __deps__.iconSize, viewer = __deps__.viewer;
+            napi = __deps__.napi, NodeView = __deps__.NodeView, iconSize = __deps__.iconSize, viewer = __deps__.viewer, NodeLink = __deps__.NodeLink;
 
             Node = function Node(_ref3) {
-              var id = _ref3.id;
+              var id = _ref3.id,
+                  view = _ref3.view,
+                  rest = _objectWithoutProperties(_ref3, ["id", "view"]);
 
               var _React$useState = React.useState(),
                   _React$useState2 = _slicedToArray(_React$useState, 2),
@@ -131,11 +168,12 @@ var index = /*#__PURE__*/
 
                 getNode(id);
               }, [id]);
-              return node ? React.createElement(NodeView, {
+              return node ? React.createElement(Box, rest, React.createElement(NodeView, {
                 node: node,
+                view: view,
                 viewer: viewer,
                 napi: napi
-              }) : null;
+              })) : null;
             };
 
             components = function components() {
@@ -161,6 +199,9 @@ var index = /*#__PURE__*/
                 },
                 Node: {
                   component: Node
+                },
+                NodeLink: {
+                  component: NodeLink
                 },
                 Text: {
                   component: Text,
