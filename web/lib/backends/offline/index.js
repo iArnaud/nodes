@@ -34,7 +34,7 @@ class OfflineBackend extends BaseBackend {
 
 Welcome to Nodes, a hackable lightweight offline-first web system with composable apps.
 
-1. <a href="/?node=${tutorialId}">Getting Started</a>
+1. <NodeLink node="${tutorialId}">Getting Started</NodeLink>
 2. <a href="https://spectrum.chat/nodes" target="_blank">Join the community</a>
 
 3. <a href="https://patreon.com/nodes" target="_blank">Support project </a>`
