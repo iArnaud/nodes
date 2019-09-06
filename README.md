@@ -11,7 +11,7 @@
   <a aria-label="join us in spectrum" href="https://spectrum.chat/nodes">
     <img alt="" src="https://img.shields.io/badge/Join%20the%20community-blueviolet.svg?style=for-the-badge&labelColor=000000">
   </a>
-  <a aria-label="support us on patreon" href="https://spectrum.chat/nodes">
+  <a aria-label="support us on patreon" href="https://patreon.com/nodes">
     <img alt="" src="https://img.shields.io/badge/Support%20on%20Patreon-red.svg?style=for-the-badge&labelColor=000000">
   </a>
 </p>
