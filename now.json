@@ -13,6 +13,6 @@
         "Service-Worker-Allowed": "/"
       }
     },
-    { "src": "/(.*)", "dest": "/web/$1?path=$1" }
+    { "src": "/(.*)", "dest": "/web/$1" }
   ]
 }
