@@ -31,7 +31,7 @@ const IndexPage = () => {
               <Anchor icon={<Favorite size='large' color='red' />} href='https://patreon.com/nodes' target='_blank' />
             </Box>
             <Nodes />
-            <Box pad='small' fill='horizontal' align='center' justify='center'><Text size='xlarge'><i>Reimagined web OS with composable apps.</i></Text></Box>
+            <Box pad='small' fill='horizontal' align='center' justify='center'><Text textAlign='center' size='xlarge'><i>Reimagined web OS with composable apps.</i></Text></Box>
             <Box round='small' align='center' justify='center'><Button color='control' margin='small' href='/app' icon={<Deploy color='control' />} label='l a u n c h' /></Box>
           </Box>
         </Box>
