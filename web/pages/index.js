@@ -2,7 +2,7 @@ import React from 'react'
 import { dark } from 'grommet/themes'
 
 import { Page } from '../lib/utils'
-import { Box, Anchor, Text, Button } from 'grommet'
+import { Box, Anchor, Text, Button, ResponsiveContext } from 'grommet'
 import { Github, Twitter, Spectrum, FacebookOption, Favorite, Deploy } from 'grommet-icons'
 
 const Nodes = () => (
@@ -16,6 +16,37 @@ const Nodes = () => (
   </Box>
 )
 
+const SocialAccounts = () => {
+  const screen = React.useContext(ResponsiveContext) || 'small'
+  const size = screen === 'small' ? 'medium' : 'large'
+  const accounts = [
+    { url: 'https://github.com/nodes-ws/nodes', icon: <Github size={size} /> },
+    { url: 'https://facebook.com/nodesws', icon: <FacebookOption size={size} /> },
+    { url: 'https://twitter.com/nodes_ws', icon: <Twitter size={size} /> },
+    { url: 'https://spectrum.chat/nodes', icon: <Spectrum size={size} /> },
+    { url: 'https://patreon.com/nodes', icon: <Favorite size={size} color='red' /> }
+  ]
+  return (
+    <Box fill='horizontal' direction='row' align='center' justify='center' gap='small'>
+      {accounts.map(account => (
+        <Anchor key={account.url} icon={account.icon} href={account.url} target='_blank' />
+      ))}
+    </Box>
+  )
+}
+
+const Description = () => {
+  const screen = React.useContext(ResponsiveContext)
+  const size = screen === 'small' ? 'medim' : 'xlarge'
+  return (
+    <Box pad='small' fill='horizontal' align='center' justify='center'>
+      <Text textAlign='center' size={size}>
+        <i>Reimagined web OS with composable apps.</i>
+      </Text>
+    </Box>
+  )
+}
+
 const IndexPage = () => {
   return (
     <Page theme={dark}>
@@ -23,15 +54,9 @@ const IndexPage = () => {
         <Box fill='horizontal' height='xsmall' as='header' align='center' justify='center' />
         <Box as='main' fill>
           <Box fill align='center' justify='center' gap='small'>
-            <Box fill='horizontal' direction='row' align='center' justify='center' gap='small'>
-              <Anchor icon={<Github size='large' />} href='https://github.com/nodes-ws/nodes' target='_blank' />
-              <Anchor icon={<FacebookOption size='large' />} href='https://facebook.com/nodesws' target='_blank' />
-              <Anchor icon={<Twitter size='large' />} href='https://twitter.com/nodes_ws' target='_blank' />
-              <Anchor icon={<Spectrum size='large' />} href='https://spectrum.chat/nodes' target='_blank' />
-              <Anchor icon={<Favorite size='large' color='red' />} href='https://patreon.com/nodes' target='_blank' />
-            </Box>
+            <SocialAccounts />
             <Nodes />
-            <Box pad='small' fill='horizontal' align='center' justify='center'><Text textAlign='center' size='xlarge'><i>Reimagined web OS with composable apps.</i></Text></Box>
+            <Description />
             <Box round='small' align='center' justify='center'><Button color='control' margin='small' href='/app' icon={<Deploy color='control' />} label='l a u n c h' /></Box>
           </Box>
         </Box>

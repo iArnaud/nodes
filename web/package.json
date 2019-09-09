@@ -41,7 +41,7 @@
     "react-spring": "8.0.20",
     "react-use-gesture": "5.1.2",
     "sift": "8.5.0",
-    "styled-components": "4.2.0",
+    "styled-components": "4.3.2",
     "tweetnacl": "^1.0.1",
     "tweetnacl-util": "^0.15.0",
     "type-of-is": "3.4.0"
