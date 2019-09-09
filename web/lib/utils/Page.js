@@ -14,7 +14,7 @@ const Meta = () => (
       <link rel='manifest' href='/static/manifest.json' />
       <link rel='apple-touch-icon' href='/static/apple-touch-icon.png' />
       <noscript>You need to enable javascript to run this app.</noscript>
-      <meta name='yandex-verification' content='f7a4d92fa364cd69' />
+      <meta name='yandex-verification' content='8f3a51ede0bf87da' />
     </Head>
     <style jsx global>{`
       body {
