@@ -45,5 +45,9 @@
     "tweetnacl": "^1.0.1",
     "tweetnacl-util": "^0.15.0",
     "type-of-is": "3.4.0"
+  },
+  "devDependencies": {
+    "webpack": "^4.39.3",
+    "babel-plugin-styled-components": "^1.10.6"
   }
 }

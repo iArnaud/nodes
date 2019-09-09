@@ -69,6 +69,7 @@ const IndexPage = () => {
           font-family: 'Nonchalance Bold';
           font-style: normal;
           font-weight: normal;
+          font-display: auto;
           src: local('Nonchalance Bold'), url('/static/fonts/Nonchalance Bold.woff') format('woff');
         }
       `}</style>
