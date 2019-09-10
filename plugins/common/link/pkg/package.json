@@ -10,14 +10,14 @@
   "pika": true,
   "sideEffects": false,
   "dependencies": {
-    "js-video-url-parser": "^0.4.0"
+    "js-video-url-parser": "^0.6.0"
   },
   "devDependencies": {
-    "@babel/preset-env": "^7.5.0",
+    "@babel/preset-env": "^7.6.0",
     "@babel/preset-react": "^7.0.0",
-    "@pika/plugin-build-web": "^0.4.0",
-    "@pika/plugin-bundle-web": "^0.4.0",
-    "@pika/plugin-standard-pkg": "^0.4.0"
+    "@pika/plugin-build-web": "^0.6.0",
+    "@pika/plugin-bundle-web": "^0.6.0",
+    "@pika/plugin-standard-pkg": "^0.6.0"
   },
   "esnext": "dist-src/index.js",
   "module": "dist-web/index.js"
