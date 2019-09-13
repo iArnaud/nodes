@@ -44,7 +44,7 @@ const init = ({ backend, cache, http, env, events, searchEngines, dimport }) => 
 
   return {
     deps: process.browser && typeof window !== 'undefined' && window.Cypress ? { backend, cache, http, env, events, dimport } : null,
-    getNode: getNode({ backend, napi }),
+    getNode: getNode({ backend, napi, http }),
     getNodeChildren: getNodeChildren({ backend, napi }),
     getView: getView({ backend, cache, http, env, dimport }),
     loadPlugin: loadPlugin({ backend, cache, http, env, dimport }),
