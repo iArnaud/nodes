@@ -29,7 +29,7 @@ const SocialAccounts = () => {
   return (
     <Box fill='horizontal' direction='row' align='center' justify='center' gap='small'>
       {accounts.map(account => (
-        <Anchor key={account.url} icon={account.icon} href={account.url} target='_blank' />
+        <Anchor key={account.url} icon={account.icon} href={account.url} target='_blank' rel='noopener' />
       ))}
     </Box>
   )
