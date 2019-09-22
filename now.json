@@ -22,7 +22,7 @@
   ],
   "build": {
     "env": {
-      "HUB_API_URL": "@hub-api-url"
+      "HUB_API_URL": "@hub_api_url"
     }
   }
 }
