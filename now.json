@@ -19,5 +19,10 @@
       "dest": "/web/$1",
       "continue": true
     }
-  ]
+  ],
+  "build": {
+    "env": {
+      "HUB_API_URL": "@hub-api-url"
+    }
+  }
 }
