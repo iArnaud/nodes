@@ -9,6 +9,7 @@
     "analyze": "BUNDLE_ANALYZE=true next build"
   },
   "dependencies": {
+    "@feathersjs/client": "^4.3.2",
     "@isomorphic-git/lightning-fs": "^3.3.0",
     "@next/bundle-analyzer": "latest",
     "@zeit/next-css": "1.0.1",
@@ -41,13 +42,14 @@
     "react-spring": "8.0.20",
     "react-use-gesture": "5.1.2",
     "sift": "8.5.0",
+    "socket.io-client": "^2.2.0",
     "styled-components": "4.3.2",
     "tweetnacl": "^1.0.1",
     "tweetnacl-util": "^0.15.0",
     "type-of-is": "3.4.0"
   },
   "devDependencies": {
-    "webpack": "^4.39.3",
-    "babel-plugin-styled-components": "^1.10.6"
+    "babel-plugin-styled-components": "^1.10.6",
+    "webpack": "^4.39.3"
   }
 }

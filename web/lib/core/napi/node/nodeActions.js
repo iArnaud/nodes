@@ -90,7 +90,7 @@ export const createUserNode = deps => async ({ id, provider, ...rest }) => {
 // FIXME: refactor to function
 class _Node {
   constructor ({ name = 'Untitled node', id = null, status = 'ok', parentId = null, sides = { desktop: {}, settings: {}, users: [] }, children = [], createdAt, updatedAt, creatorId }) {
-    this.id = id
+    if (id) this.id = id
     this.name = name
     this.status = status
     this.parentId = parentId

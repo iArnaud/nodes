@@ -27,4 +27,5 @@ const nodes = [
   ...genCommonPluginNodes(['link', 'note', 'markdown'])
 ]
 
-export default nodes
+// export default nodes
+module.exports = nodes

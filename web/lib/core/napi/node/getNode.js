@@ -68,17 +68,15 @@ const _getSystemNode = deps => async (id, parentId) => {
       children
     }
   } else if (id === '__login__') {
-    const children = (await _getUserNodes(deps)()).items
     node = {
       id,
       parentId,
-      name: parent ? `Login to ${parent.name}` : children.length ? 'Login to Nodes WebOS' : 'Welcome to Nodes WebOS! Create a user to start.',
+      name: parent ? `Login to ${parent.name}` : 'Login to Nodes',
       status: 'ok',
       sides: {
         login: {},
         settings: parent ? parent.sides.settings : {}
-      },
-      children
+      }
     }
   } else if (id === '__nstore__') {
     node = {

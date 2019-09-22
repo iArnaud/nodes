@@ -29,15 +29,6 @@ export default async ({ __deps__, __imports__ }) => {
   const preview = _view({ showControls: false })
   const view = _view({ showControls: true })
 
-  // const edit = ({ node }) => {
-  //   const user = _.get(node, 'sides.user', {})
-  //   return (
-  //     <Box fill align='center' justify='center'>
-  //       <pre>{JSON.stringify(user, null, 2)}</pre>
-  //     </Box>
-  //   )
-  // }
-
   const userSchema = {
     type: 'object',
     required: [],

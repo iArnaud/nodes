@@ -1,5 +1,5 @@
 export const login = ({ backend, cache }) => async (login, password) => {
-  cache.clear()
+  if (login) cache.clear()
   return backend.login(login, password)
 }
 

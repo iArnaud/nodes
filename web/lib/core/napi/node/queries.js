@@ -9,7 +9,7 @@ export const findNode = deps => async query => {
 
 export const getRootNode = deps => async () => findNode(deps)({ parentId: null })
 
-export const getPluginNodes = deps => async () => findNodes(deps)({ 'sides.plugin': { '$ne': null }, 'sides.plugin.canAdd': { '$eq': true } })
+export const getPluginNodes = deps => async () => findNodes(deps)({ 'sides.plugin': { '$ne': null }, 'sides.plugin.canAdd': true })
 
 export const _getTemplateNodes = deps => async nodeId => {
   const base = [{ id: '__none__', name: 'Desktop', status: 'ok', children: [], sides: { desktop: true } }]

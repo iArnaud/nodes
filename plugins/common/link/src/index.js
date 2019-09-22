@@ -2,10 +2,8 @@ import urlParser from 'js-video-url-parser'
 
 export default async ({ __deps__, __imports__ }) => {
   const { Box, Image, Anchor } = __imports__.grommet
-  const { React, lodash: _, icons, JSONSchemaForm, Router } = __imports__.utils
-  const { napi, iconSize, viewer, NodeView } = __deps__
-
-  // const PDFView = ({ file }) => <Box fill align='center' justify='center'><iframe src={file} height='100%' width='100%' style={{ border: 'none' }} /></Box>
+  const { React, lodash: _, icons, JSONSchemaForm, Router, Link } = __imports__.utils
+  const { napi, iconSize } = __deps__
 
   const IframeView = ({ url }) => (
     <Box pad={{ bottom: '56.25%' }} style={{ position: 'relative' }} fill >
@@ -38,14 +36,20 @@ export default async ({ __deps__, __imports__ }) => {
 
   const _view = ({ size }) => ({ node }) => {
     const url = _.get(node, 'sides.link.url')
+    const urlObj = new URL(url)
     const modes = {
-      // node: <NodeLinkView nodeId={nodeId} />,
-      // preview: <LinkPreview url={url} size={size} />,
       video: <Box fill pad={size === 'small' ? null : 'small'}><IframeView url={urlParser.create({ videoInfo: urlParser.parse(url), format: 'embed', params: { controls: '1' } })} /></Box>,
       pdf: <Box overflow='auto' fill align='center' justify='center'><IframeView url={url} /></Box>,
       image: <Box fill pad='small' align='center' justify='center'><Image src={url} fit={size === 'small' ? 'contain' : 'cover'} style={{ height: '100%', width: '100%' }} /></Box>,
-      // default: <WebView url={url} />
-      default: <Box fill align='center' justify='center'><Anchor size={size} label={url} href={url} target='_blank' /></Box>
+      default: (
+        <Box fill align='center' justify='center'>
+          {
+            window.location.hostname === urlObj.hostname
+              ? <Link href={urlObj.pathname + urlObj.search}><Anchor size={size === 'small' ? 'xsmall' : size} label={node.name} /></Link>
+              : <Anchor size={size === 'small' ? 'xsmall' : size} label={size === 'small' ? `${urlObj.hostname}...` : url} href={url} target='_blank' />
+          }
+        </Box>
+      )
     }
 
     return (
@@ -98,8 +102,6 @@ export default async ({ __deps__, __imports__ }) => {
 
   const icon = ({ node }) => {
     const linkIcons = {
-      // node: <icons.Share size={iconSize} />,
-      // preview: <icons.Globe size={iconSize} />,
       video: <icons.CirclePlay size={iconSize} />,
       pdf: <icons.DocumentPdf size={iconSize} />,
       image: <icons.Image size={iconSize} />,

@@ -13,6 +13,9 @@ module.exports = withBundleAnalyzer(withOffline(withCSS({
     }
     return config
   },
+  env: {
+    HUB_API_URL: process.env.HUB_API_URL
+  },
   workboxOpts: {
     swDest: 'static/service-worker.js',
     runtimeCaching: [

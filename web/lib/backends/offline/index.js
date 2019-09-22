@@ -119,11 +119,22 @@ Have a nice day, you are awesome!
   }
 
   async login (login, password) {
-    const userNode = (await this.find({ parentId: 'users', name: login })).items[0]
+    if (login) {
+      const userNode = (await this.find({ parentId: 'users', name: login })).items[0]
+      if (!userNode) return null
+      const token = `${userNode.sides.user.providers.local.id}-local`
+      cookie.set('token', token)
+      const user = userNode.sides.user
+      return { ...user, providers: Object.keys(user.providers), node: userNode.id }
+    }
+    const token = cookie.get('token')
+    if (!token) return null
+    const [id, provider] = token.split('-')
+    let userNode
+    userNode = (await this.find({ [`sides.user.providers.${provider}.id`]: id })).items[0]
     if (!userNode) return null
-    const token = `${userNode.sides.user.providers.local.id}-local-${userNode.sides.user.email}`
-    cookie.set('token', token)
-    return token
+    const user = userNode.sides.user
+    return { ...user, providers: Object.keys(user.providers), node: userNode.id }
   }
 
   async logout () {

@@ -1,5 +1,5 @@
-import getConfig from 'next/config'
+const config = {
+  hubApiUrl: process.env.HUB_API_URL
+}
 
-const { publicRuntimeConfig = {} } = getConfig() || {}
-
-export default publicRuntimeConfig
+export default config

@@ -1288,7 +1288,7 @@ var index = /*#__PURE__*/
   var _ref2 = _asyncToGenerator(
   /*#__PURE__*/
   regeneratorRuntime.mark(function _callee2(_ref) {
-    var __deps__, __imports__, _imports__$grommet, Box, Image, Anchor, _imports__$utils, React, _, icons, JSONSchemaForm, Router, napi, iconSize, viewer, NodeView, IframeView, guessUrlType, _view, pluginSchema, uiSchema, edit, icon, preview, view;
+    var __deps__, __imports__, _imports__$grommet, Box, Image, Anchor, _imports__$utils, React, _, icons, JSONSchemaForm, Router, Link, napi, iconSize, IframeView, guessUrlType, _view, pluginSchema, uiSchema, edit, icon, preview, view;
 
     return regeneratorRuntime.wrap(function _callee2$(_context2) {
       while (1) {
@@ -1296,8 +1296,8 @@ var index = /*#__PURE__*/
           case 0:
             __deps__ = _ref.__deps__, __imports__ = _ref.__imports__;
             _imports__$grommet = __imports__.grommet, Box = _imports__$grommet.Box, Image = _imports__$grommet.Image, Anchor = _imports__$grommet.Anchor;
-            _imports__$utils = __imports__.utils, React = _imports__$utils.React, _ = _imports__$utils.lodash, icons = _imports__$utils.icons, JSONSchemaForm = _imports__$utils.JSONSchemaForm, Router = _imports__$utils.Router;
-            napi = __deps__.napi, iconSize = __deps__.iconSize, viewer = __deps__.viewer, NodeView = __deps__.NodeView; // const PDFView = ({ file }) => <Box fill align='center' justify='center'><iframe src={file} height='100%' width='100%' style={{ border: 'none' }} /></Box>
+            _imports__$utils = __imports__.utils, React = _imports__$utils.React, _ = _imports__$utils.lodash, icons = _imports__$utils.icons, JSONSchemaForm = _imports__$utils.JSONSchemaForm, Router = _imports__$utils.Router, Link = _imports__$utils.Link;
+            napi = __deps__.napi, iconSize = __deps__.iconSize;
 
             IframeView = function IframeView(_ref3) {
               var url = _ref3.url;
@@ -1344,9 +1344,8 @@ var index = /*#__PURE__*/
 
                 var url = _.get(node, 'sides.link.url');
 
+                var urlObj = new URL(url);
                 var modes = {
-                  // node: <NodeLinkView nodeId={nodeId} />,
-                  // preview: <LinkPreview url={url} size={size} />,
                   video: React.createElement(Box, {
                     fill: true,
                     pad: size === 'small' ? null : 'small'
@@ -1380,13 +1379,18 @@ var index = /*#__PURE__*/
                       width: '100%'
                     }
                   })),
-                  // default: <WebView url={url} />
                   "default": React.createElement(Box, {
                     fill: true,
                     align: "center",
                     justify: "center"
+                  }, window.location.hostname === urlObj.hostname ? React.createElement(Link, {
+                    href: urlObj.pathname + urlObj.search
                   }, React.createElement(Anchor, {
-                    label: url,
+                    size: size === 'small' ? 'xsmall' : size,
+                    label: node.name
+                  })) : React.createElement(Anchor, {
+                    size: size === 'small' ? 'xsmall' : size,
+                    label: size === 'small' ? "".concat(urlObj.hostname, "...") : url,
                     href: url,
                     target: "_blank"
                   }))
@@ -1480,8 +1484,6 @@ var index = /*#__PURE__*/
             icon = function icon(_ref9) {
               var node = _ref9.node;
               var linkIcons = {
-                // node: <icons.Share size={iconSize} />,
-                // preview: <icons.Globe size={iconSize} />,
                 video: React.createElement(icons.CirclePlay, {
                   size: iconSize
                 }),
