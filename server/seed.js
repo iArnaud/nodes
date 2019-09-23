@@ -1,5 +1,5 @@
 const app = require('./src/app')
-const nodes = require('../web/lib/nodes')
+const nodes = require('.src/seed/nodes')
 
 const user = { name: 'Test User', email: 'test@example.com', password: 'test' }
 

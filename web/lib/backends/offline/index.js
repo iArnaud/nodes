@@ -74,7 +74,7 @@ Have a nice day, you are awesome!
         }
       }
     })
-    cookie.set('token', [id, 'local', 'admin@example.com'].join('-'))
+    cookie.set('token', [id, 'local'].join('-'))
     this._nodes.push(userNode, tutorialNode)
     return Promise.all(this._nodes.map(async node => this.fsBackend.create({ ...node, sides: { ...node.sides, users: [{ id: userNode.id, role: 'admin' }] } })))
   }

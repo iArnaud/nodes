@@ -4,7 +4,7 @@ module.exports = {
   before: {
     all: [],
     find: [
-      async context => console.log('[nodes] before find hook', context.params.query)
+      // async context => console.log('[nodes] before find hook', context.params.query)
     ],
     get: [],
     create: [authenticate('jwt')],
