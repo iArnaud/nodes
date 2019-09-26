@@ -9,12 +9,12 @@ import MiniSearch from 'minisearch'
 import { ObjectId } from '../utils'
 
 class OfflineBackend extends BaseBackend {
-  constructor ({ nodes = [], db, adapter = 'memory' } = {}) {
+  constructor ({ nodes = [], db, adapter = 'memory', fs } = {}) {
     super()
     this._adapter = adapter
     this._nodes = nodes
     this._db = db
-    this.fsBackend = process.browser ? new FSBackend() : null
+    this.fsBackend = process.browser ? fs || new FSBackend() : null
     this._search = new MiniSearch({ fields: ['name'] })
   }
 
