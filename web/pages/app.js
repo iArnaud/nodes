@@ -18,14 +18,13 @@ const AppPage = () => {
     <Page theme={dark}>
       {node
         ? (
-          <React.Fragment>
+          <>
             <Hotkeys node={node} view={view} napi={napi} viewer={viewer} />
             <NodeSEO node={node} />
             <NodeView node={node} view={view} napi={napi} viewer={viewer} />
-          </React.Fragment>
+          </>
         )
-        : <Loading indicator={<Spinner />} />
-      }
+        : <Loading indicator={<Spinner />} />}
     </Page>
   )
 }

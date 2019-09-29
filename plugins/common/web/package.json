@@ -1,7 +1,7 @@
 {
-  "name": "nodehub-plugin-custom",
+  "name": "@nodes/plugin-web",
   "version": "0.1.0",
-  "description": "Custom view for Nodehub",
+  "description": "Web view for Nodes",
   "main": "src/index.js",
   "module": "src/index.js",
   "@pika/pack": {
@@ -13,17 +13,12 @@
         "@pika/plugin-build-web"
       ],
       [
-        "@pika/plugin-bundle-web",
-        {
-          "namedExports": {
-            "node_modules/@babel/standalone/babel.js": ["transform"]
-          }
-        }
+        "@pika/plugin-bundle-web"
       ]
     ]
   },
   "dependencies": {
-    "@babel/standalone": "7.4.4"
+    "buble": "0.19.6"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -35,6 +30,7 @@
     "@babel/preset-react": "^7.0.0",
     "@pika/plugin-build-web": "^0.6.0",
     "@pika/plugin-bundle-web": "^0.6.0",
-    "@pika/plugin-standard-pkg": "^0.6.0"
+    "@pika/plugin-standard-pkg": "^0.6.0",
+    "@pika/types": "^0.6.1"
   }
 }
