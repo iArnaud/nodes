@@ -77,7 +77,7 @@ var index = /*#__PURE__*/
   var _ref2 = _asyncToGenerator(
   /*#__PURE__*/
   regeneratorRuntime.mark(function _callee3(_ref) {
-    var __deps__, __imports__, _imports__$grommet, Box, Button, _imports__$utils, React, _, Avatar, icons, Router, JSONSchemaForm, NodeLink, iconSize, viewer, napi, _view, icon, preview, view, userSchema, uiSchema, edit;
+    var __deps__, __imports__, _imports__$grommet, Box, Button, _imports__$utils, React, _, Avatar, icons, Router, JSONSchemaForm, dimport, NodeLink, iconSize, viewer, napi, _view, icon, preview, view, userSchema, uiSchema, edit;
 
     return regeneratorRuntime.wrap(function _callee3$(_context3) {
       while (1) {
@@ -85,7 +85,7 @@ var index = /*#__PURE__*/
           case 0:
             __deps__ = _ref.__deps__, __imports__ = _ref.__imports__;
             _imports__$grommet = __imports__.grommet, Box = _imports__$grommet.Box, Button = _imports__$grommet.Button;
-            _imports__$utils = __imports__.utils, React = _imports__$utils.React, _ = _imports__$utils.lodash, Avatar = _imports__$utils.Avatar, icons = _imports__$utils.icons, Router = _imports__$utils.Router, JSONSchemaForm = _imports__$utils.JSONSchemaForm;
+            _imports__$utils = __imports__.utils, React = _imports__$utils.React, _ = _imports__$utils.lodash, Avatar = _imports__$utils.Avatar, icons = _imports__$utils.icons, Router = _imports__$utils.Router, JSONSchemaForm = _imports__$utils.JSONSchemaForm, dimport = _imports__$utils.dimport;
             NodeLink = __imports__.nodehub.NodeLink;
             iconSize = __deps__.iconSize, viewer = __deps__.viewer, napi = __deps__.napi;
 
@@ -188,15 +188,7 @@ var index = /*#__PURE__*/
             });
             view = _view({
               showControls: true
-            }); // const edit = ({ node }) => {
-            //   const user = _.get(node, 'sides.user', {})
-            //   return (
-            //     <Box fill align='center' justify='center'>
-            //       <pre>{JSON.stringify(user, null, 2)}</pre>
-            //     </Box>
-            //   )
-            // }
-
+            });
             userSchema = {
               type: 'object',
               required: [],
@@ -243,7 +235,15 @@ var index = /*#__PURE__*/
 
               var name = user.name,
                   email = user.email,
-                  avatar = user.avatar;
+                  avatar = user.avatar; // React.useEffect(() => {
+              //   const load = async () => {
+              //     const Widget = await dimport('https://unpkg.com/remotestorage-widget@1.4.0/build/widget.js')
+              //     console.log('Widget', Widget)
+              //     const widget = new Widget(window.remotestorage)
+              //   }
+              //   load()
+              // }, [])
+
               return React.createElement(Box, {
                 fill: true,
                 align: "center",

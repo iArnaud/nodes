@@ -222,17 +222,15 @@ var index = /*#__PURE__*/
               }))));
             };
 
-            icon = function icon() {
-              return function (_ref7) {
-                var node = _ref7.node;
-                return React.createElement(Box, {
-                  fill: true,
-                  align: "center",
-                  justify: "center"
-                }, React.createElement(icons.Login, {
-                  size: iconSize
-                }));
-              };
+            icon = function icon(_ref7) {
+              var node = _ref7.node;
+              return React.createElement(Box, {
+                fill: true,
+                align: "center",
+                justify: "center"
+              }, React.createElement(icons.Login, {
+                size: iconSize
+              }));
             };
 
             preview = icon;

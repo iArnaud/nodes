@@ -11,7 +11,7 @@ const getNode = deps => async (id, parentId) => {
     node = _getErrorNode(id, parentId, e)
   }
   node.sides.settings = node.sides.settings || await _getRecursively(deps)(node, 'sides.settings')
-  node.sides.users = node.sides.users || await _getRecursively(deps)(node, 'sides.users')
+  // node.sides.users = node.sides.users || await _getRecursively(deps)(node, 'sides.users')
   return node
 }
 

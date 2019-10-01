@@ -184,7 +184,7 @@ var index = /*#__PURE__*/
   var _ref2 = _asyncToGenerator(
   /*#__PURE__*/
   regeneratorRuntime.mark(function _callee5(_ref) {
-    var __deps__, __imports__, _imports__$grommet, Box, ResponsiveContext, Menu, _imports__$utils, React, Router, _, icons, DnD, _imports__$nodehub, NodeBar, NodeLink, NodeDragTypes, napi, NodeView, viewer, Menubar, NodeSide, Bottombar, view;
+    var __deps__, __imports__, _imports__$grommet, Box, ResponsiveContext, Menu, _imports__$utils, React, Router, _, icons, DnD, _imports__$nodehub, NodeBar, NodeLink, NodeDragTypes, napi, NodeView, viewer, iconSize, Menubar, NodeSide, Bottombar, view, icon;
 
     return regeneratorRuntime.wrap(function _callee5$(_context5) {
       while (1) {
@@ -194,7 +194,7 @@ var index = /*#__PURE__*/
             _imports__$grommet = __imports__.grommet, Box = _imports__$grommet.Box, ResponsiveContext = _imports__$grommet.ResponsiveContext, Menu = _imports__$grommet.Menu;
             _imports__$utils = __imports__.utils, React = _imports__$utils.React, Router = _imports__$utils.Router, _ = _imports__$utils.lodash, icons = _imports__$utils.icons, DnD = _imports__$utils.DnD;
             _imports__$nodehub = __imports__.nodehub, NodeBar = _imports__$nodehub.NodeBar, NodeLink = _imports__$nodehub.NodeLink, NodeDragTypes = _imports__$nodehub.NodeDragTypes;
-            napi = __deps__.napi, NodeView = __deps__.NodeView, viewer = __deps__.viewer;
+            napi = __deps__.napi, NodeView = __deps__.NodeView, viewer = __deps__.viewer, iconSize = __deps__.iconSize;
 
             Menubar = function Menubar(_ref3) {
               var node = _ref3.node;
@@ -502,13 +502,25 @@ var index = /*#__PURE__*/
               })));
             };
 
+            icon = function icon(_ref8) {
+              var node = _ref8.node;
+              return React.createElement(Box, {
+                fill: true,
+                align: "center",
+                justify: "center"
+              }, React.createElement(icons.Template, {
+                size: iconSize
+              }));
+            };
+
             return _context5.abrupt("return", {
               modes: {
+                icon: icon,
                 view: view
               }
             });
 
-          case 10:
+          case 11:
           case "end":
             return _context5.stop();
         }

@@ -72,7 +72,7 @@ export default async ({ __deps__, __imports__ }) => {
     )
   }
 
-  const icon = () => ({ node }) => <Box fill align='center' justify='center'><icons.Login size={iconSize} /></Box>
+  const icon = ({ node }) => <Box fill align='center' justify='center'><icons.Login size={iconSize} /></Box>
   const preview = icon
   const edit = view
 

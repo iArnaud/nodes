@@ -2,7 +2,7 @@ export default async ({ __deps__, __imports__ }) => {
   const { Box, ResponsiveContext, Menu } = __imports__.grommet
   const { React, Router, lodash: _, icons, DnD } = __imports__.utils
   const { NodeBar, NodeLink, NodeDragTypes } = __imports__.nodehub
-  const { napi, NodeView, viewer } = __deps__
+  const { napi, NodeView, viewer, iconSize } = __deps__
 
   const Menubar = ({ node }) => {
     const screen = React.useContext(ResponsiveContext)
@@ -86,8 +86,11 @@ export default async ({ __deps__, __imports__ }) => {
     )
   }
 
+  const icon = ({ node }) => <Box fill align='center' justify='center'><icons.Template size={iconSize} /></Box>
+
   return {
     modes: {
+      icon,
       view
     }
   }

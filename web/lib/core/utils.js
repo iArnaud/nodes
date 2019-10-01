@@ -11,7 +11,7 @@ import {
   Add, Duplicate, Edit, Pin, Next, Trash, More, Code,
   Desktop, StatusCritical, Login, Action, Aggregate, Calculator,
   Install, InstallOption, Apps, Directions, Search, LinkBottom, Services, UserSettings,
-  Logout, User, Close, Checkmark, Group, Google, WifiNone, Wifi, Link as LinkIcon,
+  Logout, User, Close, Checkmark, Group, Google, WifiNone, Wifi, Link as LinkIcon, Template,
   Share, CirclePlay, DocumentPdf, Image as ImageIcon, Note, Download, Upload, Star, DocumentText
 } from 'grommet-icons'
 
@@ -49,7 +49,7 @@ const icons = {
   Add, Duplicate, Edit, Pin, Next, Trash, More, Code,
   Desktop, StatusCritical, Login, Action, Aggregate, Calculator,
   Install, InstallOption, Apps, Directions, Search, LinkBottom, Services, UserSettings,
-  Logout, User, Close, Checkmark, Group, Google, WifiNone, Wifi, Link: LinkIcon,
+  Logout, User, Close, Checkmark, Group, Google, WifiNone, Wifi, Link: LinkIcon, Template,
   Share, CirclePlay, DocumentPdf, Image: ImageIcon, Note, Download, Upload, Star, DocumentText
 }
 const DnD = { ...ReactDnD, HTML5Backend, NativeTypes }

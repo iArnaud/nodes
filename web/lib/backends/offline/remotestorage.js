@@ -1,12 +1,12 @@
 import BaseBackend from '../base'
 import RemoteStorage from 'remotestoragejs'
 import { ObjectId } from '../utils'
-import { applyPatch } from 'fast-json-patch'
+import { applyPatch, compare } from 'fast-json-patch'
 
 class RSBackend extends BaseBackend {
   constructor ({ rs, path = 'nodes' } = {}) {
     super()
-    rs = rs || new RemoteStorage({ logging: true })
+    rs = rs || new RemoteStorage({ logging: false })
     rs.access.claim(path, 'rw')
     rs.caching.enable(`/${path}/`)
     this.client = rs.scope(`/${path}/`)
@@ -22,6 +22,22 @@ class RSBackend extends BaseBackend {
     if (typeof window !== 'undefined') {
       window.remotestorage = rs
     }
+    this._handleChange = this._handleChange.bind(this)
+    this.client.on('change', this._handleChange)
+  }
+
+  _handleChange (event) {
+    if (event.origin === 'remote') {
+      console.log('remote change', event)
+      if (!event.oldValue && event.newValue) {
+        this.emit('remote:create', event.newValue)
+      } else if (!event.newValue && event.oldValue) {
+        this.emit('remote:delete', event.oldValue)
+      } else {
+        const update = compare(event.oldValue, event.newValue)
+        this.emit('remote:update', { id: event.newValue.id, update })
+      }
+    }
   }
 
   async create (node) {
@@ -35,7 +51,10 @@ class RSBackend extends BaseBackend {
   }
 
   async update (id, update) {
-
+    const old = await this.retrieve(id)
+    const updatedNode = applyPatch(old, update, /* validate */ true, /* mutate */ false).newDocument
+    await this.client.storeObject('node', `/${id}`, updatedNode)
+    return updatedNode
   }
 
   async delete (id) {

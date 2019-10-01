@@ -22,12 +22,12 @@ const PreviousNode = ({ node, justify = 'center' }) => (
 
 const NodeName = ({ node, canRename, screen, napi, viewer, showPrevious, size, justify = 'start' }) => (
   <Box direction='row' align='center' justify={justify} data-testid='nodeName' fill='horizontal' >
-    <NodeLink node={node.id}><Button style={{ paddingRight: '3px' }} data-testid='viewDefaultSide.action' plain icon={<NodeStatus node={node} size={screen === 'small' ? 'small' : size.status} />} /></NodeLink>
+    <NodeLink node={node.id} query={Router.query.parent && { parent: Router.query.parent }}><Button style={{ paddingRight: '3px' }} data-testid='viewDefaultSide.action' plain icon={<NodeStatus node={node} size={screen === 'small' ? 'small' : size.status} />} /></NodeLink>
     {canRename && napi.hasPermission(viewer, node, 'rename')
       ? <Text truncate weight='bold' size={screen === 'small' ? 'small' : size.name} data-testid='rename.action'>
         <InlineEdit isEditing={node.name === 'Untitled node'} text={node.name} onFocusOut={async name => name && name !== '' && napi.renameNode(node.id, name)} />
       </Text>
-      : <NodeLink node={node.id}>
+      : <NodeLink node={node.id} query={Router.query.parent && { parent: Router.query.parent }}>
         <Box direction='row' fill align='center' style={{ cursor: 'pointer' }}><Text weight='bold' truncate size={screen === 'small' ? 'small' : size.name}>{node.name}</Text></Box>
       </NodeLink>
     }

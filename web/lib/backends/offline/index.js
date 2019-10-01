@@ -15,7 +15,27 @@ class OfflineBackend extends BaseBackend {
     this._nodes = nodes
     this._db = db
     this.fsBackend = process.browser ? fs || new FSBackend() : null
+    this._handleRemoteChange = this._handleRemoteChange.bind(this)
+    if (this.fsBackend) this._handleRemoteChange()
     this._search = new MiniSearch({ fields: ['name'] })
+  }
+
+  _handleRemoteChange () {
+    this.fsBackend.on('remote:create', async node => {
+      console.log('remote create sync', node)
+      const localNode = await this.retrieve(node.id)
+      if (!localNode) this.create(node, false)
+    })
+    this.fsBackend.on('remote:delete', async node => {
+      console.log('remote delete sync', node)
+      const localNode = await this.retrieve(node.id)
+      if (localNode) this.delete(node.id, false)
+    })
+    this.fsBackend.on('remote:update', async ({ id, update }) => {
+      console.log('remote update sync', id, update)
+      const localNode = await this.retrieve(id)
+      if (localNode) this.update(id, update, false)
+    })
   }
 
   async install () {
@@ -30,7 +50,7 @@ class OfflineBackend extends BaseBackend {
         user: { name: 'New User', providers: { local: { id } } },
         markdown: {
           content: `
-# Nodes beta
+### Nodes beta
 
 Welcome to Nodes, a hackable lightweight offline-first web system with composable apps.
 
@@ -56,7 +76,7 @@ Have a nice day, you are awesome!
         desktop: {},
         markdown: {
           content: `
-# Tutorial
+### Tutorial
 
 1. **Create node:**
 
@@ -119,6 +139,7 @@ Have a nice day, you are awesome!
   }
 
   async login (login, password) {
+    await this.getDB() // NOTE: need this to login auto-created new user on first page visit
     if (login) {
       const userNode = (await this.find({ parentId: 'users', name: login })).items[0]
       if (!userNode) return null
@@ -130,8 +151,7 @@ Have a nice day, you are awesome!
     const token = cookie.get('token')
     if (!token) return null
     const [id, provider] = token.split('-')
-    let userNode
-    userNode = (await this.find({ [`sides.user.providers.${provider}.id`]: id })).items[0]
+    const userNode = (await this.find({ [`sides.user.providers.${provider}.id`]: id })).items[0]
     if (!userNode) return null
     const user = userNode.sides.user
     return { ...user, providers: Object.keys(user.providers), node: userNode.id }
@@ -141,13 +161,13 @@ Have a nice day, you are awesome!
     cookie.remove('token')
   }
 
-  async create (node) {
+  async create (node, sync = true) {
     // console.log('[Offline backend] create', node)
     node.id = node.id || ObjectId()
     const nodesCollection = await this.getDB()
     const _node = nodesCollection.insert({ ...node })
     await this.saveDB()
-    if (this.fsBackend) {
+    if (this.fsBackend && sync) {
       this.fsBackend.create(node).then(res => console.log('fs backend created', res))
     }
     this._search.add({ id: _node.id, name: _node.name })
@@ -165,7 +185,7 @@ Have a nice day, you are awesome!
     return node
   }
 
-  async update (id, update) {
+  async update (id, update, sync = true) {
     // console.log('[Offline backend] update', id, update)
     const nodesCollection = await this.getDB()
     const old = nodesCollection.findOne({ id })
@@ -173,7 +193,7 @@ Have a nice day, you are awesome!
     const updatedNode = applyPatch(old, update, /* validate */ true, /* mutate */ false).newDocument
     const node = nodesCollection.update(updatedNode)
     await this.saveDB()
-    if (this.fsBackend) {
+    if (this.fsBackend && sync) {
       this.fsBackend.update(id, update).then(res => console.log('fs backend updated', res))
     }
     if (old.name !== node.name) {
@@ -190,16 +210,18 @@ Have a nice day, you are awesome!
     return node
   }
 
-  async delete (id) {
+  async delete (id, sync = true) {
     // console.log('[Offline backend] delete', id)
     const nodesCollection = await this.getDB()
+    const node = nodesCollection.findOne({ id })
     const res = nodesCollection.findAndRemove({ id })
     await this.saveDB()
-    if (this.fsBackend) {
+    if (this.fsBackend && sync) {
       this.fsBackend.delete(id).then(res => console.log('fs backend deleted', res))
     }
     this._search.remove({ id }) // NOTE: need to test
     // console.log('[Offline backend] deleted', res)
+    this.emit('node:event', { type: `child-remove:${node.parentId}`, payload: { node } })
     return res
   }
 

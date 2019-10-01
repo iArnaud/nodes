@@ -1,7 +1,7 @@
 import React from 'react'
 import { useRouter } from 'next/router'
 
-export const usePageState = (napi) => {
+export const usePageState = napi => {
   const router = useRouter()
   const [state, setState] = React.useState({ node: null, view: null, viewer: null })
   const { node: nodeId, parent: parentId } = router.query
@@ -14,6 +14,7 @@ export const usePageState = (napi) => {
     const view = plain ? _view : 'ui'
     const getPageState = async () => {
       const viewer = await napi.login()
+      console.log('getPageState viewer', viewer)
       if (viewer === null && nodeId !== '__login__') {
         return router.push({ pathname: router.pathname, query: nodeId ? { node: '__login__', parent: nodeId } : { node: '__login__' } })
       }

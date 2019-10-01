@@ -1,6 +1,6 @@
 export default async ({ __deps__, __imports__ }) => {
   const { Box, Button } = __imports__.grommet
-  const { React, lodash: _, Avatar, icons, Router, JSONSchemaForm } = __imports__.utils
+  const { React, lodash: _, Avatar, icons, Router, JSONSchemaForm, dimport } = __imports__.utils
   const { NodeLink } = __imports__.nodehub
   const { iconSize, viewer, napi } = __deps__
   const _view = ({ showControls }) => ({ node }) => {
@@ -72,6 +72,14 @@ export default async ({ __deps__, __imports__ }) => {
   const edit = ({ node }) => {
     const user = _.get(node, 'sides.user', {})
     const { name, email, avatar } = user
+    // React.useEffect(() => {
+    //   const load = async () => {
+    //     const Widget = await dimport('https://unpkg.com/remotestorage-widget@1.4.0/build/widget.js')
+    //     console.log('Widget', Widget)
+    //     const widget = new Widget(window.remotestorage)
+    //   }
+    //   load()
+    // }, [])
     return (
       <Box fill align='center' justify='center'>
         <Box width='large' overflow='scroll'>

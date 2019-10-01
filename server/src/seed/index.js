@@ -26,16 +26,17 @@ module.exports = async function (app) {
         user: { name: user.name, email: user.email, providers: { hub: { id: adminUser.id } } },
         users: [{ id: adminUser._id, role: 'admin' }],
         desktop: {}
-      } })
-
+      }
+    })
     await Promise.all(nodes.map(node => nodesService.create({ ...node, sides: { ...node.sides, users: [{ id: userNode.id, role: 'admin' }] } })))
     logger.info(`${nodes.length} nodes installed.`)
   } else {
     logger.info('Checking updates..')
     for (const node of nodes) {
-      const res = await nodesService.get(node.id)
-      if (!res) {
-        logger.info(node.name, 'missing, installing..')
+      try {
+        await nodesService.get(node.id)
+      } catch (e) {
+        logger.info(`${node.name} missing, installing..`)
         await nodesService.create(node)
       }
     }
