@@ -1,4 +1,5 @@
 import React from 'react'
+import '../lib/utils/empty.css' // FIXME: workaroung to fix next.js routing bug https://github.com/zeit/next-plugins/issues/282
 import { Page, remotestorage } from '../lib/utils'
 import { Box } from 'grommet'
 import { useRouter } from 'next/router'
@@ -14,9 +15,8 @@ const Storage = ({ remotestorage }) => {
 
   React.useEffect(() => {
     remotestorage.on('connected', () => {
-      console.log('CONNECTED', router)
-      window.location.href = '/app2'
-      // router.push('/app2') // FIXME: not working, bug in next.js
+      console.log('CONNECTED')
+      router.push('/app2')
     })
   })
   return (
