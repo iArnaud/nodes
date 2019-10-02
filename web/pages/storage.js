@@ -15,8 +15,8 @@ const Storage = ({ remotestorage }) => {
   React.useEffect(() => {
     remotestorage.on('connected', () => {
       console.log('CONNECTED', router)
-      // window.location.href = '/app2'
-      router.push('/app2')
+      window.location.href = '/app2'
+      // router.push('/app2') // FIXME: not working, bug in next.js
     })
   })
   return (
