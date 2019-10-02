@@ -48,7 +48,8 @@
     "styled-components": "4.3.2",
     "tweetnacl": "^1.0.1",
     "tweetnacl-util": "^0.15.0",
-    "type-of-is": "3.4.0"
+    "type-of-is": "3.4.0",
+    "clipboard-copy": "3.1.0"
   },
   "devDependencies": {
     "babel-plugin-styled-components": "^1.10.6",

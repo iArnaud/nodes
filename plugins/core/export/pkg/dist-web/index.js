@@ -77,15 +77,15 @@ var index = /*#__PURE__*/
   var _ref2 = _asyncToGenerator(
   /*#__PURE__*/
   regeneratorRuntime.mark(function _callee3(_ref) {
-    var __deps__, __imports__, Box, _imports__$utils, React, Peer, icons, hooks, iconSize, viewer, napi, getNodeTree, view;
+    var __deps__, __imports__, _imports__$grommet, Box, Button, Text, _imports__$utils, React, Peer, icons, hooks, lib, iconSize, viewer, napi, getNodeTree, view;
 
     return regeneratorRuntime.wrap(function _callee3$(_context3) {
       while (1) {
         switch (_context3.prev = _context3.next) {
           case 0:
             __deps__ = _ref.__deps__, __imports__ = _ref.__imports__;
-            Box = __imports__.grommet.Box;
-            _imports__$utils = __imports__.utils, React = _imports__$utils.React, Peer = _imports__$utils.Peer, icons = _imports__$utils.icons, hooks = _imports__$utils.hooks;
+            _imports__$grommet = __imports__.grommet, Box = _imports__$grommet.Box, Button = _imports__$grommet.Button, Text = _imports__$grommet.Text;
+            _imports__$utils = __imports__.utils, React = _imports__$utils.React, Peer = _imports__$utils.Peer, icons = _imports__$utils.icons, hooks = _imports__$utils.hooks, lib = _imports__$utils.lib;
             iconSize = __deps__.iconSize, viewer = __deps__.viewer, napi = __deps__.napi;
 
             getNodeTree =
@@ -194,7 +194,12 @@ var index = /*#__PURE__*/
               var _React$useState = React.useState(),
                   _React$useState2 = _slicedToArray(_React$useState, 2),
                   peer = _React$useState2[0],
-                  setPeer = _React$useState2[1]; // const [loaded] = hooks.useScript('https://cdn.jsdelivr.net/npm/webtorrent@latest/webtorrent.min.js')
+                  setPeer = _React$useState2[1];
+
+              var _React$useState3 = React.useState(false),
+                  _React$useState4 = _slicedToArray(_React$useState3, 2),
+                  copied = _React$useState4[0],
+                  setCopied = _React$useState4[1]; // const [loaded] = hooks.useScript('https://cdn.jsdelivr.net/npm/webtorrent@latest/webtorrent.min.js')
               // React.useEffect(() => {
               //   loaded && console.log(window.WebTorrent)
               // }, [loaded])
@@ -243,7 +248,30 @@ var index = /*#__PURE__*/
                 fill: true,
                 align: "center",
                 justify: "center"
-              }, peer ? React.createElement(Box, null, peer.id) : 'loading...');
+              }, peer ? React.createElement(Box, {
+                direction: "row",
+                gap: "small",
+                align: "center",
+                justify: "center",
+                pad: "small",
+                round: "xsmall",
+                background: {
+                  color: 'black',
+                  opacity: 'medium'
+                }
+              }, React.createElement(Box, null, React.createElement(Text, {
+                weight: "bold",
+                color: copied && 'control'
+              }, peer.id)), React.createElement(Button, {
+                icon: React.createElement(icons.Copy, {
+                  color: "control"
+                }),
+                onClick: function onClick() {
+                  return lib.clipboardCopy(peer.id).then(function () {
+                    return setCopied(true);
+                  });
+                }
+              })) : 'loading...');
             };
 
             return _context3.abrupt("return", {

@@ -1,6 +1,6 @@
 export default async ({ __deps__, __imports__ }) => {
-  const { Box } = __imports__.grommet
-  const { React, Peer, icons, hooks } = __imports__.utils
+  const { Box, Button, Text } = __imports__.grommet
+  const { React, Peer, icons, hooks, lib } = __imports__.utils
   const { iconSize, viewer, napi } = __deps__
 
   const getNodeTree = async (node, nodes = []) => {
@@ -14,6 +14,7 @@ export default async ({ __deps__, __imports__ }) => {
 
   const view = ({ node }) => {
     const [peer, setPeer] = React.useState()
+    const [copied, setCopied] = React.useState(false)
     // const [loaded] = hooks.useScript('https://cdn.jsdelivr.net/npm/webtorrent@latest/webtorrent.min.js')
     // React.useEffect(() => {
     //   loaded && console.log(window.WebTorrent)
@@ -36,9 +37,15 @@ export default async ({ __deps__, __imports__ }) => {
     return (
       <Box fill align='center' justify='center'>{
         peer
-          ? <Box>{peer.id}</Box>
+          ? (
+            <Box direction='row' gap='small' align='center' justify='center' pad='small' round='xsmall' background={{ color: 'black', opacity: 'medium' }}>
+              <Box><Text weight='bold' color={copied && 'control'}>{peer.id}</Text></Box>
+              <Button icon={<icons.Copy color='control' />} onClick={() => lib.clipboardCopy(peer.id).then(() => setCopied(true))} />
+            </Box>
+          )
           : 'loading...'
-      }</Box>
+      }
+      </Box>
     )
   }
   return {
