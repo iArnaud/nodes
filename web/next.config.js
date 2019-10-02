@@ -14,7 +14,9 @@ module.exports = withBundleAnalyzer(withOffline(withCSS({
     return config
   },
   env: {
-    HUB_API_URL: process.env.HUB_API_URL
+    HUB_API_URL: process.env.HUB_API_URL,
+    GOOGLE_CLIENT_ID: process.env.GOOGLE_CLIENT_ID,
+    DROPBOX_CLIENT_ID: process.env.DROPBOX_CLIENT_ID
   },
   workboxOpts: {
     swDest: 'static/service-worker.js',

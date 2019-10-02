@@ -6,9 +6,11 @@ import { applyPatch, compare } from 'fast-json-patch'
 class RSBackend extends BaseBackend {
   constructor ({ rs, path = 'nodes' } = {}) {
     super()
-    rs = rs || new RemoteStorage({ logging: false })
-    rs.access.claim(path, 'rw')
-    rs.caching.enable(`/${path}/`)
+    if (!rs) {
+      rs = new RemoteStorage({ logging: false })
+      rs.access.claim(path, 'rw')
+      rs.caching.enable(`/${path}/`)
+    }
     this.client = rs.scope(`/${path}/`)
     this.client.declareType('node', {
       type: 'object',

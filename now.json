@@ -22,7 +22,9 @@
   ],
   "build": {
     "env": {
-      "HUB_API_URL": "@hub_api_url"
+      "HUB_API_URL": "@hub_api_url",
+      "GOOGLE_CLIENT_ID": "@google_client_id",
+      "DROPBOX_CLIENT_ID": "@dropbox_client_id"
     }
   }
 }

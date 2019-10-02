@@ -6,7 +6,7 @@ import { Grommet, ThemeContext } from 'grommet'
 import { dark } from 'grommet/themes'
 
 const Meta = () => (
-  <React.Fragment>
+  <>
     <Head>
       <meta name='viewport' content='width=device-width, initial-scale=1' />
       <meta charSet='utf-8' />
@@ -35,7 +35,7 @@ const Meta = () => (
 
     `}
     </style>
-  </React.Fragment>
+  </>
 )
 
 export default ({ theme = dark, children }) => (

@@ -3,7 +3,7 @@ import Widget from 'remotestorage-widget'
 import { Box, Button } from 'grommet'
 import { Wifi } from 'grommet-icons'
 
-const parentId = 'remotestorage-widget'
+const parentId = 'remotestorage-widget-container'
 
 const Toggler = ({ clickHandler, status }) => (
   <Box pad='xsmall' align='center' justify='center'>
@@ -11,9 +11,9 @@ const Toggler = ({ clickHandler, status }) => (
   </Box>
 )
 
-export default ({ remotestorage }) => {
+export default ({ remotestorage, initialOpen = false }) => {
   const [widget, setWidget] = React.useState()
-  const [open, setOpen] = React.useState()
+  const [open, setOpen] = React.useState(initialOpen)
   // const [status, setStatus] = React.useState('disabled')
   const [status, setStatus] = React.useState(remotestorage.connected ? 'ok' : 'warning')
   React.useEffect(() => {
@@ -43,15 +43,34 @@ export default ({ remotestorage }) => {
   const clickHandler = () => {
     setOpen(!open)
   }
+  // return (
+  //   <Box style={{ position: 'fixed', bottom: '10px', left: '10px', right: open ? '10px' : null }}>
+  //     {open && (
+  //       <Box round='xsmall' width='medium' height={['warning', 'error'].includes(status) ? '510px' : '120px'} justify='between' background={{ color: 'black', opacity: 'strong' }}>
+  //         <Box pad='small' align='center' id={parentId} style={{ position: 'relative' }} />
+  //         <Box fill='horizontal' align='start'><Toggler status={status} clickHandler={clickHandler} /></Box>
+  //       </Box>
+  //     )}
+  //     {!open && <Box round='xsmall' background={{ color: `status-${status}`, opacity: 'medium' }}><Toggler status={status} clickHandler={clickHandler} /></Box>}
+  //   </Box>
+  // )
   return (
-    <Box style={{ position: 'fixed', bottom: '10px', left: '10px', right: open ? '10px' : null }}>
-      {open && (
-        <Box round='xsmall' width='medium' height='medium' justify='between' background={{ color: 'black', opacity: 'strong' }}>
+    <Box style={{ position: 'fixed', bottom: '10px', left: '10px' }}>
+      {!['warning', 'error'].includes(status) && open && (
+        <Box round='xsmall' width='medium' height={['warning', 'error'].includes(status) ? '510px' : '120px'} justify='between' background={{ color: 'black', opacity: 'strong' }}>
           <Box pad='small' align='center' id={parentId} style={{ position: 'relative' }} />
           <Box fill='horizontal' align='start'><Toggler status={status} clickHandler={clickHandler} /></Box>
         </Box>
       )}
-      {!open && <Box round='xsmall' background={{ color: `status-${status}`, opacity: 'medium' }}><Toggler status={status} clickHandler={clickHandler} /></Box>}
+      {['warning', 'error'].includes(status)
+        ? (
+          <Box round='xsmall' background={{ color: `status-${status}`, opacity: 'medium' }}>
+            <Box pad='xsmall' align='center' justify='center'>
+              <Button href='/storage' plain icon={<Wifi color={`status-${status}`} />} />
+            </Box>
+          </Box>
+        )
+        : !open && <Box round='xsmall' background={{ color: `status-${status}`, opacity: 'medium' }}><Toggler status={status} clickHandler={clickHandler} /></Box>}
     </Box>
   )
 }
