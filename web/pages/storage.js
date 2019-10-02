@@ -16,7 +16,7 @@ const Storage = ({ remotestorage }) => {
   React.useEffect(() => {
     remotestorage.on('connected', () => {
       console.log('CONNECTED')
-      router.push('/app2')
+      router.push('/app')
     })
   })
   return (
