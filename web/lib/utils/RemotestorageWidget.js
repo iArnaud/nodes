@@ -26,7 +26,8 @@ export default ({ remotestorage, initialOpen = false }) => {
     remotestorage.on('disconnected', () => {
       setStatus('warning')
     })
-    remotestorage.on('error', () => {
+    remotestorage.on('error', (err) => {
+      console.error(err)
       setStatus('error')
     })
     remotestorage.on('network-online', () => {
