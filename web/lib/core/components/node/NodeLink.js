@@ -22,6 +22,13 @@ const NodeLink = ({ node, view, query = {}, router, label, children }) => {
       }, 1300)
     }
   }
+  // NOTE: clean urls is possible but need proper testing
+  // const queryString = Object.keys(query).filter(key => key !== 'node').map(key => {
+  //   return encodeURIComponent(key) + '=' + encodeURIComponent(query[key])
+  // }).join('&')
+  // console.log(queryString)
+  // const cleanUrl = `${router.pathname}/${node}`
+  // return <Link href={href} as={queryString ? cleanUrl + `?${queryString}` : cleanUrl}>
   return <Link href={href}>
     {React.cloneElement(children || <Anchor label={label || node} />, {
       onDragEnter: e => {

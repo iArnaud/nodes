@@ -1,7 +1,9 @@
 import React from 'react'
+import Link from 'next/link'
 import '../lib/utils/empty.css' // FIXME: workaroung to fix next.js routing bug https://github.com/zeit/next-plugins/issues/282
 import { Page, remotestorage } from '../lib/utils'
-import { Box } from 'grommet'
+import { Box, Anchor } from 'grommet'
+import { LinkPrevious } from 'grommet-icons'
 import { useRouter } from 'next/router'
 const parentId = 'remotestorage-widget-custom'
 
@@ -21,6 +23,9 @@ const Storage = ({ remotestorage }) => {
   })
   return (
     <Box height='100vh' width='100vw'>
+      <Box style={{ position: 'fixed', bottom: '20px', left: '20px' }}>
+        <Link href='/app'><Anchor color='white' label='Back to App' icon={<LinkPrevious />} /></Link>
+      </Box>
       <Box align='center' justify='center' fill>
         <Box align='center' justify='center' id={parentId} />
       </Box>

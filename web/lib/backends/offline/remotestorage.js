@@ -11,6 +11,7 @@ class RSBackend extends BaseBackend {
       rs.access.claim(path, 'rw')
       rs.caching.enable(`/${path}/`)
     }
+    this.rs = rs
     this.client = rs.scope(`/${path}/`)
     this.client.declareType('node', {
       type: 'object',
@@ -40,6 +41,10 @@ class RSBackend extends BaseBackend {
         this.emit('remote:update', { id: event.newValue.id, update })
       }
     }
+  }
+
+  async logout () {
+    return this.rs.disconnect()
   }
 
   async create (node) {

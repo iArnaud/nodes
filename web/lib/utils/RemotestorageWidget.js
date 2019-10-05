@@ -25,6 +25,8 @@ export default ({ remotestorage, initialOpen = false }) => {
     })
     remotestorage.on('disconnected', () => {
       setStatus('warning')
+      console.log('storage disconnected, reloading page...')
+      window.location.href = window.location.pathname
     })
     remotestorage.on('error', (err) => {
       console.error(err)

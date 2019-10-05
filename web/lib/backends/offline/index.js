@@ -1,5 +1,3 @@
-import cookie from 'js-cookie'
-
 import BaseBackend from '../base'
 import FSBackend from './fs'
 import { configureLoki } from './db'
@@ -7,6 +5,9 @@ import { configureLoki } from './db'
 import { applyPatch } from 'fast-json-patch'
 import MiniSearch from 'minisearch'
 import { ObjectId } from '../utils'
+
+const newUserId = 'welcome'
+// const newUserId = 'me' // NOTE: need to think how to migrate
 
 class OfflineBackend extends BaseBackend {
   constructor ({ nodes = [], db, adapter = 'memory', fs } = {}) {
@@ -39,7 +40,7 @@ class OfflineBackend extends BaseBackend {
   }
 
   async install () {
-    const id = 'welcome'
+    const id = newUserId
     const tutorialId = 'tutorial'
     const userNode = await this.fsBackend.create({
       id,
@@ -70,6 +71,7 @@ Have a nice day, you are awesome!
     })
     const tutorialNode = await this.fsBackend.create({
       id: tutorialId,
+      status: 'ok',
       parentId: userNode.id,
       name: 'Tutorial',
       sides: {
@@ -94,7 +96,6 @@ Have a nice day, you are awesome!
         }
       }
     })
-    cookie.set('token', [id, 'local'].join('-'))
     this._nodes.push(userNode, tutorialNode)
     return Promise.all(this._nodes.map(async node => this.fsBackend.create({ ...node, sides: { ...node.sides, users: [{ id: userNode.id, role: 'admin' }] } })))
   }
@@ -138,27 +139,22 @@ Have a nice day, you are awesome!
     return db
   }
 
-  async login (login, password) {
-    await this.getDB() // NOTE: need this to login auto-created new user on first page visit
-    if (login) {
-      const userNode = (await this.find({ parentId: 'users', name: login })).items[0]
-      if (!userNode) return null
-      const token = `${userNode.sides.user.providers.local.id}-local`
-      cookie.set('token', token)
+  async login () {
+    // NOTE: experiment to remote custom login screen from local nodes completely and use remotestorage auth flow instead
+    try {
+      const userNode = await this.retrieve(newUserId)
       const user = userNode.sides.user
       return { ...user, providers: Object.keys(user.providers), node: userNode.id }
+    } catch (e) {
+      console.error(e)
+      return null
     }
-    const token = cookie.get('token')
-    if (!token) return null
-    const [id, provider] = token.split('-')
-    const userNode = (await this.find({ [`sides.user.providers.${provider}.id`]: id })).items[0]
-    if (!userNode) return null
-    const user = userNode.sides.user
-    return { ...user, providers: Object.keys(user.providers), node: userNode.id }
   }
 
   async logout () {
-    cookie.remove('token')
+    if (this.fsBackend && this.fsBackend.logout) {
+      return this.fsBackend.logout()
+    }
   }
 
   async create (node, sync = true) {
