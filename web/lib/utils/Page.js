@@ -18,10 +18,29 @@ const Meta = () => (
       <noscript>You need to enable javascript to run this app.</noscript>
     </Head>
     <style jsx global>{`
+      html,body {
+        box-sizing: border-box;
+      }
+      *, *:before, *:after { box-sizing: inherit; }
+
+      /* Set full height: http://stackoverflow.com/questions/6654958/make-body-have-100-of-the-browser-height */
+      html {
+        /* body will set it's height based on its parent, which is html */
+        height: 100%;
+
+        /* set full width as well */
+        width: 100%;
+      }
       body {
-        background: black;
+        /* min-height is needed for pages that might scroll, ie they may contain _more_ than 100% of viewport height */
+        min-height: 100%;
+
+        /* needed to prevent unwanted scroll-bars */
         margin: 0;
-        height: '100%';
+        padding: 0;
+
+        /* This is just so we can tell the body block apart from the app container */
+        background-color: black;
       }
 
       * {
@@ -41,11 +60,7 @@ const Meta = () => (
 export default ({ theme = dark, children }) => (
   <Grommet full theme={theme}>
     <Meta />
-    <ThemeContext.Extend value={{
-      anchor: {
-        color: theme.global.colors.text
-      }
-    }}>
+    <ThemeContext.Extend value={{ anchor: { color: theme.global.colors.text } }}>
       {children}
     </ThemeContext.Extend>
   </Grommet>
