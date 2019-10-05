@@ -25,7 +25,7 @@ const NodeName = ({ node, canRename, screen, napi, viewer, showPrevious, size, j
     <NodeLink node={node.id} query={Router.query.parent && { parent: Router.query.parent }}><Button style={{ paddingRight: '3px' }} data-testid='viewDefaultSide.action' plain icon={<NodeStatus node={node} size={screen === 'small' ? 'small' : size.status} />} /></NodeLink>
     {canRename && napi.hasPermission(viewer, node, 'rename')
       ? <Text truncate weight='bold' size={screen === 'small' ? 'small' : size.name} data-testid='rename.action'>
-        <InlineEdit isEditing={node.name === 'Untitled node'} text={node.name} onFocusOut={async name => name && name !== '' && napi.renameNode(node.id, name)} />
+        <InlineEdit isEditing={(node.name === 'Untitled node') || node.name.endsWith(' ')} text={node.name} onFocusOut={async name => name && name !== '' && napi.renameNode(node.id, name)} />
       </Text>
       : <NodeLink node={node.id} query={Router.query.parent && { parent: Router.query.parent }}>
         <Box direction='row' fill align='center' style={{ cursor: 'pointer' }}><Text weight='bold' truncate size={screen === 'small' ? 'small' : size.name}>{node.name}</Text></Box>

@@ -40,6 +40,10 @@ class RSBackend extends BaseBackend {
         const update = compare(event.oldValue, event.newValue)
         this.emit('remote:update', { id: event.newValue.id, update })
       }
+    } else if (event.origin === 'conflict') {
+      const update = compare(event.oldValue, event.newValue)
+      console.log('SYNC CONFLICT', event, update)
+      if (update.length) this.emit('remote:update', { id: event.newValue.id, update })
     }
   }
 
@@ -49,18 +53,18 @@ class RSBackend extends BaseBackend {
 
   async create (node) {
     node.id = node.id || ObjectId()
-    await this.client.storeObject('node', `/${node.id}`, node)
+    await this.client.storeObject('node', node.id, node)
     return node
   }
 
   async retrieve (nodeId) {
-    return this.client.getObject(`/${nodeId}`, false)
+    return this.client.getObject(nodeId, false)
   }
 
   async update (id, update) {
     const old = await this.retrieve(id)
     const updatedNode = applyPatch(old, update, /* validate */ true, /* mutate */ false).newDocument
-    await this.client.storeObject('node', `/${id}`, updatedNode)
+    await this.client.storeObject('node', id, updatedNode)
     return updatedNode
   }
 
@@ -70,7 +74,7 @@ class RSBackend extends BaseBackend {
 
   async find (query) {
     if (query) throw new Error('[RSBackend]: find with query not implemented.')
-    const res = await this.client.getAll('/', false)
+    const res = await this.client.getAll('', false)
     console.log('[RSBackend] find', res)
     // NOTE: https://remotestoragejs.readthedocs.io/en/latest/js-api/base-client.html#getAll
     // For items that are not JSON-stringified objects (e.g. stored using storeFile instead of storeObject), the object’s value is filled in with true.

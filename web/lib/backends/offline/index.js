@@ -2,7 +2,7 @@ import BaseBackend from '../base'
 import FSBackend from './fs'
 import { configureLoki } from './db'
 
-import { applyPatch } from 'fast-json-patch'
+import { applyPatch, compare } from 'fast-json-patch'
 import MiniSearch from 'minisearch'
 import { ObjectId } from '../utils'
 
@@ -25,7 +25,14 @@ class OfflineBackend extends BaseBackend {
     this.fsBackend.on('remote:create', async node => {
       console.log('remote create sync', node)
       const localNode = await this.retrieve(node.id)
-      if (!localNode) this.create(node, false)
+      // if (!localNode) this.create(node, false)
+      if (localNode) {
+        const update = compare(localNode, node)
+        await this.update(node.id, update, false)
+        if (node.id === newUserId) console.log(`USER NODE UPDATED: ${await this.retrieve(node.id)}`)
+      } else {
+        await this.create(node, false)
+      }
     })
     this.fsBackend.on('remote:delete', async node => {
       console.log('remote delete sync', node)

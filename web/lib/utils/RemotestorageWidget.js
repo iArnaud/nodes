@@ -37,6 +37,7 @@ export default ({ remotestorage, initialOpen = false }) => {
     })
   }, [])
   React.useEffect(() => {
+    // const _widget = new Widget(remotestorage, { skipInitial: true, backdropModal: false, leaveOpen: true, redirectUri: window.location.pathname })
     const _widget = new Widget(remotestorage, { skipInitial: true, backdropModal: false, leaveOpen: true })
     setWidget(_widget)
   }, [])

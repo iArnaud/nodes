@@ -64,9 +64,11 @@ const NodeView = class extends React.Component {
   }
 
   updateNode = async (node) => {
-    const { napi } = this.props
+    const { napi, view, mode } = this.props
     node = await napi.getNode(node.id)
-    return this.setState({ node })
+    let stateUpdate = { node }
+    if (node.name !== this.props.node.name) stateUpdate.View = await this.getView(node, view, mode)
+    return this.setState(stateUpdate)
   }
 
   render () {
