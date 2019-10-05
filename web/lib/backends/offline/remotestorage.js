@@ -79,7 +79,7 @@ class RSBackend extends BaseBackend {
     // NOTE: https://remotestoragejs.readthedocs.io/en/latest/js-api/base-client.html#getAll
     // For items that are not JSON-stringified objects (e.g. stored using storeFile instead of storeObject), the object’s value is filled in with true.
     // Somehow(with Armadietto server, not with php-remote-storage server) we sometimes get this 'true' values. Maybe it's .~metadata file? Need to check.
-    return Object.values(res).filter(val => val !== true)
+    return Object.values(res).filter(val => (val !== true) && val.id)
   }
 
   async search (text) {
