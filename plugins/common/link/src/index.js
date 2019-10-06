@@ -1,7 +1,7 @@
 import urlParser from 'js-video-url-parser'
 
 export default async ({ __deps__, __imports__ }) => {
-  const { Box, Image, Anchor } = __imports__.grommet
+  const { Box, Image, Anchor, Text, Button } = __imports__.grommet
   const { React, lodash: _, icons, JSONSchemaForm, Router, Link } = __imports__.utils
   const { napi, iconSize } = __deps__
 
@@ -95,6 +95,14 @@ export default async ({ __deps__, __imports__ }) => {
               Router.push({ pathname: Router.pathname, query: { node: node.id } })
             }}
           />
+        </Box>
+        <Box align='start' justify='start' gap='small' pad='small'>
+          <Text><i>To use the bookmarklet drag this to your bookmarks toolbar:</i></Text>
+          <Box round='xsmall' pad='small' background={{ color: 'black', opacity: 'medium' }}>
+            <Button plain href={`javascript:void(location.href="${window.location.origin}${window.location.pathname}?node="+encodeURIComponent(location.href)+"&title="+encodeURIComponent(document.title))`}>
+              <Text weight='bold'>Create Node</Text>
+            </Button>
+          </Box>
         </Box>
       </Box>
     )

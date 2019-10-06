@@ -21,7 +21,17 @@ export const usePageState = napi => {
       if (viewer && (!nodeId || nodeId === '__login__')) {
         return router.push({ pathname: router.pathname, query: { node: (!nodeId || nodeId === '__login__') ? viewer.node : nodeId } })
       }
-      const node = nodeId ? await napi.getNode(nodeId, parentId) : null
+      // const node = nodeId ? await napi.getNode(nodeId, parentId) : null
+      // new experimental node creation from url:
+      let node
+      if (nodeId) {
+        if (nodeId.startsWith('http')) {
+          node = await napi.createNode(null, { parentId: parentId || viewer.node, name: query.get('title') || nodeId, sides: { link: { url: nodeId } } })
+          return router.push({ pathname: router.pathname, query: { node: node.id } })
+        } else {
+          node = await napi.getNode(nodeId, parentId)
+        }
+      }
       setState({ node, viewer, view })
     }
     // NOTE: hack to overcome how next.js handle prerendering, when on first load router.query is empty, while actual query is not.

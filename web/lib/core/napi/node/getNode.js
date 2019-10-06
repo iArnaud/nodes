@@ -93,6 +93,7 @@ const _getSystemNode = deps => async (id, parentId) => {
 }
 
 const _getNodeFromUrl = ({ http }) => async (url, parentId) => {
+  // FIXME: after introducing node creation from url, this code is not used.
   const res = await http.get(url)
   const node = res.data
   return { ...node, parentId }

@@ -40,14 +40,14 @@ var index = /*#__PURE__*/
   var _ref2 = _asyncToGenerator(
   /*#__PURE__*/
   regeneratorRuntime.mark(function _callee2(_ref) {
-    var __deps__, __imports__, _imports__$grommet, Box, Image, Anchor, _imports__$utils, React, _, icons, JSONSchemaForm, Router, Link, napi, iconSize, IframeView, guessUrlType, _view, pluginSchema, uiSchema, edit, icon, preview, view;
+    var __deps__, __imports__, _imports__$grommet, Box, Image, Anchor, Text, Button, _imports__$utils, React, _, icons, JSONSchemaForm, Router, Link, napi, iconSize, IframeView, guessUrlType, _view, pluginSchema, uiSchema, edit, icon, preview, view;
 
     return regeneratorRuntime.wrap(function _callee2$(_context2) {
       while (1) {
         switch (_context2.prev = _context2.next) {
           case 0:
             __deps__ = _ref.__deps__, __imports__ = _ref.__imports__;
-            _imports__$grommet = __imports__.grommet, Box = _imports__$grommet.Box, Image = _imports__$grommet.Image, Anchor = _imports__$grommet.Anchor;
+            _imports__$grommet = __imports__.grommet, Box = _imports__$grommet.Box, Image = _imports__$grommet.Image, Anchor = _imports__$grommet.Anchor, Text = _imports__$grommet.Text, Button = _imports__$grommet.Button;
             _imports__$utils = __imports__.utils, React = _imports__$utils.React, _ = _imports__$utils.lodash, icons = _imports__$utils.icons, JSONSchemaForm = _imports__$utils.JSONSchemaForm, Router = _imports__$utils.Router, Link = _imports__$utils.Link;
             napi = __deps__.napi, iconSize = __deps__.iconSize;
 
@@ -230,7 +230,24 @@ var index = /*#__PURE__*/
                     return _ref8.apply(this, arguments);
                   };
                 }()
-              })));
+              })), React.createElement(Box, {
+                align: "start",
+                justify: "start",
+                gap: "small",
+                pad: "small"
+              }, React.createElement(Text, null, React.createElement("i", null, "To use the bookmarklet drag this to your bookmarks toolbar:")), React.createElement(Box, {
+                round: "xsmall",
+                pad: "small",
+                background: {
+                  color: 'black',
+                  opacity: 'medium'
+                }
+              }, React.createElement(Button, {
+                plain: true,
+                href: "javascript:void(location.href=\"".concat(window.location.origin).concat(window.location.pathname, "?node=\"+encodeURIComponent(location.href)+\"&title=\"+encodeURIComponent(document.title))")
+              }, React.createElement(Text, {
+                weight: "bold"
+              }, "Create Node")))));
             };
 
             icon = function icon(_ref9) {
