@@ -37,13 +37,14 @@ const init = ({ backend, cache, http, env, events, searchEngines, dimport }) => 
 
   handleNodeEvents({ backend, cache, events })
 
-  let napi = {} // this will be lightweight variant of napi for consumption by execMethod
+  const napi = {} // this will be lightweight variant of napi for consumption by execMethod
   napi.findNode = findNode({ backend })
   napi.findNodes = findNodes({ backend })
   napi.getPluginNodes = getPluginNodes({ backend })
 
   return {
-    deps: process.browser && typeof window !== 'undefined' && window.Cypress ? { backend, cache, http, env, events, dimport } : null,
+    // deps: process.browser && typeof window !== 'undefined' && window.Cypress ? { backend, cache, http, env, events, dimport } : null,
+    _deps: { backend, cache, http, env, events, dimport }, // NOTE: access internals for testing via window.napi, then better to remove
     getNode: getNode({ backend, napi, http }),
     getNodeChildren: getNodeChildren({ backend, napi }),
     getView: getView({ backend, cache, http, env, dimport }),

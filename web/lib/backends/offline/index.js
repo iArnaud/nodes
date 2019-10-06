@@ -25,13 +25,14 @@ class OfflineBackend extends BaseBackend {
     this.fsBackend.on('remote:create', async node => {
       console.log('remote create sync', node)
       const localNode = await this.retrieve(node.id)
-      // if (!localNode) this.create(node, false)
       if (localNode) {
         const update = compare(localNode, node)
         await this.update(node.id, update, false)
         if (node.id === newUserId) console.log(`USER NODE UPDATED: ${await this.retrieve(node.id)}`)
       } else {
-        await this.create(node, false)
+        // NOTE: drop 'false'(not syncinc again) as temporary fix for https://github.com/remotestorage/remotestorage.js/issues/759#issue-42640298
+        // await this.create(node, false)
+        await this.create(node)
       }
     })
     this.fsBackend.on('remote:delete', async node => {
@@ -110,7 +111,7 @@ Have a nice day, you are awesome!
   async checkUpdates () {
     for (const node of this._nodes) {
       const res = await this.fsBackend.retrieve(node.id)
-      console.log('checkUpdates found', node.name)
+      // console.log('checkUpdates found', node.name)
       if (!res) {
         console.log(node.name, 'missing, installing..')
         await this.fsBackend.create(node)
