@@ -36,7 +36,7 @@ const NodeName = ({ node, canRename, screen, napi, viewer, showPrevious, size, j
 )
 
 const Users = ({ node, napi, viewer, size }) => (
-  <Box direction='row' gap='small' align='center' justify='center' style={{ minWidth: '50px' }} fill='horizontal' >
+  <Box direction='row' gap='small' align='center' justify='center' style={{ minWidth: '50px' }} fill='horizontal'>
     <NodeUsers node={node} size={size} napi={napi} viewer={viewer} />
   </Box>
 )
@@ -105,7 +105,7 @@ const NodeBar = ({ node, napi, viewer, showPrevious = true, canRename = true, si
   size = { ...defaultSize, ...size }
   const screen = React.useContext(ResponsiveContext)
   return (
-    <React.Fragment>
+    <>
       {
         screen === 'small' && size.users !== 'small'
           ? (
@@ -139,10 +139,8 @@ const NodeBar = ({ node, napi, viewer, showPrevious = true, canRename = true, si
               </Box>
             </Box>
           ) : (
-            <Box fill='horizontal' align='center' justify='center' pad='xsmall' gap='small'>
-              <Box direction='row' fill='horizontal' justify='center'>
-                <Box fill>{napi.hasPermission(viewer, node, 'viewUsers') && <Users node={node} viewer={viewer} napi={napi} size={screen === 'small' ? 'small' : size.users} /> }</Box>
-              </Box>
+            <Box fill='horizontal' align='center' justify='center' pad='xsmall' gap='small' height='70px'>
+              {napi.hasPermission(viewer, node, 'viewUsers') && <Users node={node} viewer={viewer} napi={napi} size={screen === 'small' ? 'small' : size.users} /> }
               <Box fill='horizontal' direction='row' align='center' justify='between'>
                 <Box fill><NodeName node={node} napi={napi} viewer={viewer} canRename={canRename} showPrevious={showPrevious} size={size} screen={screen} /></Box>
                 <Box><NodeActions node={node} viewer={viewer} napi={napi} screen={screen} actions={actions} size={size} justify='end' /></Box>
@@ -150,7 +148,7 @@ const NodeBar = ({ node, napi, viewer, showPrevious = true, canRename = true, si
             </Box>
           )
       }
-    </React.Fragment>
+    </>
   )
 }
 

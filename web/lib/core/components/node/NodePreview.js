@@ -21,7 +21,7 @@ const NodePreview = ({ node, napi, viewer, showPreview = true, onClick }) => {
       data-testid={`${node.name}.nodePreview`}
       data-nodeid={node.id}
     >
-      <Box fill='horizontal' direction='row' justify='between' overflow='scroll' gap='xsmall' pad='xsmall'>
+      <Box fill='horizontal' height='20px' direction='row' justify='between' overflow='scroll' gap='xsmall' pad='xsmall'>
         {
           Object.keys(node.sides).filter(key => key !== 'layout').map(view => (
             <NodeLink key={view} node={node.id} view={view}>
@@ -46,7 +46,7 @@ const NodePreview = ({ node, napi, viewer, showPreview = true, onClick }) => {
           )
         }
       </CoolBox>
-      <Box fill='horizontal'>
+      <Box fill='horizontal' height='70px'>
         <NodeBar
           node={node}
           napi={napi}

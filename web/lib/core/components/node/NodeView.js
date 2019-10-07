@@ -50,6 +50,18 @@ const NodeView = class extends React.Component {
     }
   }
 
+  // shouldComponentUpdate (nextProps, nextState) {
+  //   const { node, view, mode, viewer } = this.props
+  //   const { View } = this.state
+  //   const nodeChanged = !node || (!node && nextProps.node) || (node && node.id !== nextProps.node.id) || (node && node.parentId !== nextProps.node.parentId)
+  //   const ViewChanged = (!View && nextState.View) || (View !== nextState.View)
+  //   const viewChanged = !view || (view !== nextProps.view || mode !== nextProps.mode)
+  //   const viewerChanged = (!viewer && nextProps.viewer) || (viewer && !nextProps.viewer) || (viewer && nextProps.viewer) && (viewer.node !== nextProps.viewer.node)
+  //   const update = ViewChanged || nodeChanged || viewChanged || viewerChanged
+  //   console.log('shouldComponentUpdate', node.name, Boolean(update))
+  //   return update
+  // }
+
   componentWillUnmount () {
     // FIXME: need to stop all requests and unsubscribe from node updates.
     const { napi, node } = this.props
@@ -82,7 +94,8 @@ const NodeView = class extends React.Component {
       return null
     }
     const testid = `${node.name}.${view ? view.split('-')[0] : napi.getNodeView(node)}.${mode || (view ? view.split('-')[1] || 'view' : 'view')}`
-    return <Box animation={{ type: 'fadeIn', duration: 500 }} fill align='center' justify='center' data-nodeid={node.id} data-testid={testid}><View node={node} /></Box>
+    // return <Box animation={{ type: 'fadeIn', duration: 500 }} />
+    return <Box fill align='center' justify='center' data-nodeid={node.id} data-testid={testid}><View node={node} /></Box>
   }
 }
 

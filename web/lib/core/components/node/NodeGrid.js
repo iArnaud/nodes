@@ -24,7 +24,8 @@ import { Grid, InfiniteScroll, Button } from 'grommet'
 const NodeGrid = ({
   nodes, Item, onMore, fill = true, step = 10,
   columns = { count: 'fill', size: 'small' }, rows = 'small',
-  gap = { row: 'small', column: 'small' } }) => {
+  gap = { row: 'small', column: 'small' }
+}) => {
   return (
     <Grid
       fill={fill}
