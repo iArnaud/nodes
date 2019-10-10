@@ -8,8 +8,8 @@ import {
   ThemeContext, TextInput, CheckBox, Button, Stack, InfiniteScroll, Table, Markdown
 } from 'grommet'
 import {
-  Add, Duplicate, Edit, Pin, Next, Trash, More, Code, Copy,
-  Desktop, StatusCritical, Login, Action, Aggregate, Calculator,
+  Add, Duplicate, Edit, Pin, Next, Trash, More, Code, Copy, MailOption,
+  Desktop, StatusCritical, Login, Action, Aggregate, Calculator, Music,
   Install, InstallOption, Apps, Directions, Search, LinkBottom, Services, UserSettings,
   Logout, User, Close, Checkmark, Group, Google, WifiNone, Wifi, Link as LinkIcon, Template,
   Share, CirclePlay, DocumentPdf, Image as ImageIcon, Note, Download, Upload, Star, DocumentText
@@ -46,8 +46,8 @@ const Grommet = {
   ThemeContext, TextInput, CheckBox, Button, Stack, InfiniteScroll, Table, Markdown, Paragraph
 }
 const icons = {
-  Add, Duplicate, Edit, Pin, Next, Trash, More, Code, Copy,
-  Desktop, StatusCritical, Login, Action, Aggregate, Calculator,
+  Add, Duplicate, Edit, Pin, Next, Trash, More, Code, Copy, Mail: MailOption,
+  Desktop, StatusCritical, Login, Action, Aggregate, Calculator, Music,
   Install, InstallOption, Apps, Directions, Search, LinkBottom, Services, UserSettings,
   Logout, User, Close, Checkmark, Group, Google, WifiNone, Wifi, Link: LinkIcon, Template,
   Share, CirclePlay, DocumentPdf, Image: ImageIcon, Note, Download, Upload, Star, DocumentText

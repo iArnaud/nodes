@@ -80,10 +80,14 @@ var index = /*#__PURE__*/
 
               if (url.endsWith('.jpg') || url.endsWith('.jpeg') || url.endsWith('.webp') || url.endsWith('.png')) {
                 type = 'image';
+              } else if (url.endsWith('.mp3') || url.endsWith('.wav') || url.endsWith('.ogg')) {
+                type = 'audio';
               } else if (url.endsWith('.pdf')) {
                 type = 'pdf';
               } else if (urlParser.parse(url)) {
                 type = 'video';
+              } else if (url.startsWith('mailto:')) {
+                type = 'email';
               }
 
               return type;
@@ -98,6 +102,24 @@ var index = /*#__PURE__*/
 
                 var urlObj = new URL(url);
                 var modes = {
+                  email: React.createElement(Box, {
+                    pad: "small",
+                    align: "center",
+                    background: {
+                      color: 'black',
+                      opacity: 'medium'
+                    },
+                    justify: "center",
+                    round: "xsmall"
+                  }, React.createElement(Anchor, {
+                    size: size === 'small' ? 'xsmall' : size,
+                    href: url,
+                    label: url.split('mailto:')[1],
+                    icon: size !== 'small' && React.createElement(icons.Mail, {
+                      size: size,
+                      color: "control"
+                    })
+                  })),
                   video: React.createElement(Box, {
                     fill: true,
                     pad: size === 'small' ? null : 'small'
@@ -110,6 +132,23 @@ var index = /*#__PURE__*/
                       }
                     })
                   })),
+                  audio: React.createElement(Box, {
+                    pad: "small",
+                    align: "center",
+                    justify: "center",
+                    background: {
+                      color: 'black',
+                      opacity: 'medium'
+                    },
+                    round: "xsmall"
+                  }, React.createElement("audio", {
+                    style: {
+                      width: size === 'small' ? '150px' : '300px'
+                    },
+                    controls: true
+                  }, React.createElement("source", {
+                    src: url
+                  }))),
                   pdf: React.createElement(Box, {
                     overflow: "auto",
                     fill: true,
@@ -132,7 +171,12 @@ var index = /*#__PURE__*/
                     }
                   })),
                   "default": React.createElement(Box, {
-                    fill: true,
+                    pad: "small",
+                    background: {
+                      color: 'black',
+                      opacity: 'medium'
+                    },
+                    round: "xsmall",
                     align: "center",
                     justify: "center"
                   }, window.location.hostname === urlObj.hostname ? React.createElement(Link, {
@@ -254,6 +298,12 @@ var index = /*#__PURE__*/
               var node = _ref9.node;
               var linkIcons = {
                 video: React.createElement(icons.CirclePlay, {
+                  size: iconSize
+                }),
+                audio: React.createElement(icons.Music, {
+                  size: iconSize
+                }),
+                email: React.createElement(icons.Mail, {
                   size: iconSize
                 }),
                 pdf: React.createElement(icons.DocumentPdf, {

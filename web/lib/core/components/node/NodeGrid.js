@@ -1,5 +1,5 @@
 import React from 'react'
-import { Grid, InfiniteScroll, Button } from 'grommet'
+import { Grid, Button } from 'grommet'
 
 // const NodeGrid = ({
 //   nodes, Item, onMore, fill = true, step = 10,
