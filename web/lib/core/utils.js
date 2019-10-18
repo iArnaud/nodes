@@ -9,7 +9,7 @@ import {
 } from 'grommet'
 import {
   Add, Duplicate, Edit, Pin, Next, Trash, More, Code, Copy, MailOption,
-  Desktop, StatusCritical, Login, Action, Aggregate, Calculator, Music,
+  Desktop, StatusCritical, Login, Action, Aggregate, Calculator, Music, Refresh,
   Install, InstallOption, Apps, Directions, Search, LinkBottom, Services, UserSettings,
   Logout, User, Close, Checkmark, Group, Google, WifiNone, Wifi, Link as LinkIcon, Template,
   Share, CirclePlay, DocumentPdf, Image as ImageIcon, Note, Download, Upload, Star, DocumentText
@@ -47,7 +47,7 @@ const Grommet = {
 }
 const icons = {
   Add, Duplicate, Edit, Pin, Next, Trash, More, Code, Copy, Mail: MailOption,
-  Desktop, StatusCritical, Login, Action, Aggregate, Calculator, Music,
+  Desktop, StatusCritical, Login, Action, Aggregate, Calculator, Music, Refresh,
   Install, InstallOption, Apps, Directions, Search, LinkBottom, Services, UserSettings,
   Logout, User, Close, Checkmark, Group, Google, WifiNone, Wifi, Link: LinkIcon, Template,
   Share, CirclePlay, DocumentPdf, Image: ImageIcon, Note, Download, Upload, Star, DocumentText

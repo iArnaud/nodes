@@ -7,7 +7,7 @@ import 'prismjs/themes/prism-funky.css'
 
 export default ({ value, onChange, options = { language: 'javascript', size: 'medium' } }) => {
   const { language, size } = options
-  const _onChange = onChange ? throttle(onChange, 10) : () => {}
+  const _onChange = onChange ? throttle(onChange, 100) : () => {}
   const [code, setCode] = React.useState(value)
   return (
     <Editor
